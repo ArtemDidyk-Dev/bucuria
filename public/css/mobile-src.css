@@ -1,0 +1,512 @@
+:root {
+    --column-width: 290px;
+    --offset: 15px;
+    --color-black: #1f1f1f;
+    --color-white: #ffffff;
+    --color-light-grey: #d2d2d2;
+    --color-grey: #aeaeae;
+    --color-blue2: #2d9cdb;
+    --color-red: #c81317;
+    --color-red-hover: #b80c10;
+    --color-skin: #f3e4b9;
+    --color-green2: #27ae60;
+}
+
+
+body,
+input,
+textarea,
+select {
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+    -webkit-text-size-adjust: none;
+}
+
+#transition-disabled * {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+}
+
+img,
+svg {
+    max-width: 100%;
+    display: block;
+}
+
+* {
+    box-sizing: border-box;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: none;
+}
+
+body,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+form,
+table,
+tr,
+td,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+p,
+span,
+b,
+i,
+input,
+textarea,
+fieldset {
+    margin: 0;
+    padding: 0;
+}
+
+.none {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.fade-out {
+    opacity: 1;
+    transition: 0.3s;
+    pointer-events: auto;
+}
+
+.fade-out.active {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.fade-in {
+    opacity: 0;
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+.fade-in.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.container {
+    padding-left: var(--offset);
+    padding-right: var(--offset);
+}
+
+.container-offset {
+    width: var(--column-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img[srcset] {
+    object-fit: scale-down !important;
+    object-position: center !important;
+}
+
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 10001;
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s;
+}
+
+#loader.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#loader path {
+    fill: var(--color-second);
+}
+
+.h1 {
+    font-family: Taviraj;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 44px;
+}
+
+.h2 {
+    font-family: Taviraj;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 38px;
+    text-transform: uppercase;
+}
+
+.h3 {
+    font-family: Taviraj;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 34px;
+    text-transform: uppercase;
+}
+
+.h4 {
+    font-family: Taviraj;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 30px;
+    text-transform: uppercase;
+}
+
+.h5 {
+    font-family: Taviraj;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    font-family: Urbanist;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+}
+
+.extra-text {
+    font-family: Urbanist;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.footer {
+    font-size: 16px;
+    font-family: Montserrat;
+    line-height: 24px;
+}
+
+.footer-title {
+    font-family: Taviraj;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 23px;
+    text-transform: uppercase;
+}
+
+.menu {
+    font-family: Urbanist;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 19px;
+    text-transform: uppercase;
+}
+
+.button-normal {
+    font-family: Urbanist;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 22px;
+    text-transform: uppercase;
+}
+
+.button-small {
+    font-family: Urbanist;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    text-transform: uppercase;
+}
+
+.button-small-2 {
+    font-family: Montserrat;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 19px;
+}
+
+.lang {
+    font-family: Urbanist;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px;
+}
+
+.cookie-headline {
+    font-family: Taviraj;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 21px;
+}
+
+.cookie {
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+}
+
+.main-text {
+    font-family: Urbanist;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 26px;
+}
+
+.filter {
+    font-family: Taviraj;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 23px;
+}
+
+.bread-crumbs {
+    font-family: Raleway;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+}
+
+.color-black {
+    color: var(--color-black);
+}
+
+.color-grey {
+    color: var(--color-grey);
+}
+
+.color-light-grey {
+    color: var(--color-light-grey);
+}
+
+.color-white {
+    color: var(--color-white);
+}
+
+.color-red {
+    color: var(--color-red);
+}
+
+.color-red-hover {
+    color: var(--color-red-hover);
+}
+
+.color-green2 {
+    color: var(--color-green2);
+}
+
+.desktop {
+    display: none !important;
+}
+
+/* 404 */
+
+.error-404 {
+    padding-bottom: 40px;
+}
+
+.breadcrumbs-404 {
+    position: absolute;
+    top: 95px;
+}
+
+.error-404-content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+}
+
+.error-404-image {
+    display: block;
+    position: absolute;
+    object-fit: containe;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 709px;
+    z-index: -1;
+    object-fit: contain;
+}
+
+.error-404-title {
+    display: block;
+    width: 100%;
+    margin-top: 390px;
+    font-family: Taviraj;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 50px;
+    text-transform: uppercase;
+}
+
+.error-404-description {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.error-404-main {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.btn-section-404 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.error-404-content .btn-home {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 50px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    border: 1px solid var(--color-red);
+}
+
+.error-404-content .btn-catalog {
+    display: flex;
+    padding: 14px 50px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    text-transform: uppercase;
+    background: var(--color-red);
+}
+
+.btn-home:hover {
+    transition: 0.3s;
+    color: var(--color-red);
+    background: var(--color-white);
+}
+
+.btn-catalog:hover {
+    transition: 0.3s;
+    color: var(--color-red);
+    background: var(--color-white);
+}
+
+.mb {
+    margin-bottom: 80px;
+}
+
+/* MODALS */
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    z-index: 10000;
+}
+
+.modal3 {
+    position: absolute;
+    top: 470px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    z-index: 10001;
+}
+
+.modal4 {
+    position: absolute;
+    top: 940px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    z-index: 10001;
+}
+
+.modal2 {
+    position: absolute;
+    top: 1080px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    z-index: 10001;
+}
+
+.container-modal {
+    border-radius: 10px;
+    background: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 70px;
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.closemodal {
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.closemodal svg {
+    width: 10px;
+    height: 10px;
+}
+
+.breadcrumbs-block {
+    position: relative;
+    margin-top: 80px;
+}
