@@ -151,7 +151,7 @@
 
     .year-link {
         text-align: center;
-        font-family: Urbanist;
+        font-family: 'Alice';
         font-size: 18px;
         font-style: normal;
         font-weight: 500;
@@ -342,7 +342,7 @@
 
     .year-link {
         text-align: center;
-        font-family: Urbanist;
+        font-family: 'Alice';
         font-size: 16px;
         font-style: normal;
         font-weight: 500;

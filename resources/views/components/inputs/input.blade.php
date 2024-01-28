@@ -67,7 +67,7 @@
     }
 
     .label-input {
-        font-family: Urbanist;
+        font-family: 'Alice';
         font-size: 12px;
         font-style: normal;
         font-weight: 700;
@@ -123,7 +123,7 @@
     }
 
     .label-input {
-        font-family: Urbanist;
+        font-family: 'Alice';
         font-size: 12px;
         font-style: normal;
         font-weight: 700;

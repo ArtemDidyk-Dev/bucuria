@@ -89,7 +89,7 @@
     .modal-description {
         width: 360px;
         text-align: center;
-        font-family: Montserrat;
+        font-family: 'Alice';
         font-size: 13px;
         font-style: normal;
         font-weight: 500;
@@ -264,7 +264,7 @@
     }
 
     .label-input {
-        font-family: Urbanist;
+        font-family: 'Alice';
         font-size: 11px;
         font-style: normal;
         font-weight: 700;
@@ -274,7 +274,7 @@
     }
 
     .input::placeholder {
-        font-family: Urbanist;
+        font-family: 'Alice';
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
@@ -291,7 +291,7 @@
         width: 290px;
         text-align: center;
         text-align: center;
-        font-family: Montserrat;
+        font-family: 'Alice';
         font-size: 12px;
         font-style: normal;
         font-weight: 500;

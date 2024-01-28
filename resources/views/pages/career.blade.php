@@ -487,7 +487,7 @@
 
     .career-desc {
         width: 290px;
-        font-family: Urbanist;
+        font-family: 'Alice';
         font-size: 14px;
         font-style: normal;
         font-weight: 400;

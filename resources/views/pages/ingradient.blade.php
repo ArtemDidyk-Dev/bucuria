@@ -162,7 +162,7 @@
     .last-card li,
     .last-card p {
         margin-top: 6px;
-        font-family: Urbanist;
+        font-family: 'Alice';
         font-size: 18px;
         font-style: normal;
         font-weight: 300;

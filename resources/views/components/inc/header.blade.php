@@ -319,7 +319,7 @@
 
     .search-item-title {
         font-size: 13px;
-        font-family: Urbanist;
+        font-family: 'Alice';
         font-style: normal;
         font-weight: 600;
         line-height: 18px;
@@ -634,7 +634,7 @@
     .menu-item-title {
         text-align: center;
         font-size: 13px;
-        font-family: Montserrat;
+        font-family: 'Alice';
         font-style: normal;
         font-weight: 500;
         line-height: 20px;
@@ -794,7 +794,7 @@
     }
 
     .mobile-link-text {
-        font-family: Urbanist;
+        font-family: 'Alice';
         font-size: 13px;
         font-style: normal;
         font-weight: 700;
@@ -993,7 +993,7 @@
 
     .search-item-title {
         font-size: 13px;
-        font-family: Urbanist;
+        font-family: 'Alice';
         font-style: normal;
         font-weight: 600;
         line-height: 18px;
@@ -1076,7 +1076,7 @@
 
     .menu-item-title {
         text-align: center;
-        font-family: Montserrat;
+        font-family: 'Alice';
         font-size: 12px;
         font-style: normal;
         font-weight: 500;

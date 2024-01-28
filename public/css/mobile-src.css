@@ -1,3 +1,10 @@
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Alice';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/alice-v20-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
 :root {
     --column-width: 290px;
     --offset: 15px;
@@ -187,7 +194,7 @@ img[srcset] {
 }
 
 .subtitle {
-    font-family: Urbanist;
+    font-family: 'Alice';
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -195,7 +202,7 @@ img[srcset] {
 }
 
 .extra-text {
-    font-family: Urbanist;
+    font-family: 'Alice';
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -204,7 +211,7 @@ img[srcset] {
 
 .footer {
     font-size: 16px;
-    font-family: Montserrat;
+    font-family: 'Alice';
     line-height: 24px;
 }
 
@@ -218,7 +225,7 @@ img[srcset] {
 }
 
 .menu {
-    font-family: Urbanist;
+    font-family: 'Alice';
     font-size: 11px;
     font-style: normal;
     font-weight: 700;
@@ -227,7 +234,7 @@ img[srcset] {
 }
 
 .button-normal {
-    font-family: Urbanist;
+    font-family: 'Alice';
     font-size: 14px;
     font-style: normal;
     font-weight: 800;
@@ -236,7 +243,7 @@ img[srcset] {
 }
 
 .button-small {
-    font-family: Urbanist;
+    font-family: 'Alice';
     font-size: 12px;
     font-style: normal;
     font-weight: 700;
@@ -245,7 +252,7 @@ img[srcset] {
 }
 
 .button-small-2 {
-    font-family: Montserrat;
+    font-family: 'Alice';
     font-size: 11px;
     font-style: normal;
     font-weight: 600;
@@ -253,7 +260,7 @@ img[srcset] {
 }
 
 .lang {
-    font-family: Urbanist;
+    font-family: 'Alice';
     font-size: 12px;
     font-style: normal;
     font-weight: 700;
@@ -269,7 +276,7 @@ img[srcset] {
 }
 
 .cookie {
-    font-family: Montserrat;
+    font-family: 'Alice';
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -277,7 +284,7 @@ img[srcset] {
 }
 
 .main-text {
-    font-family: Urbanist;
+    font-family: 'Alice';
     font-size: 16px;
     font-style: normal;
     font-weight: 300;
