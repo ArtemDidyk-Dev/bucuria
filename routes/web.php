@@ -29,6 +29,7 @@ Route::group([
 	'middleware' => [
 		\App\FastAdminPanel\Middleware\Convertor::class,
 		//\App\FastAdminPanel\Middleware\RedirectSEO::class,
+        \App\Http\Middleware\FondSwitch::class
 	]
 ], function () {
 
