@@ -184,7 +184,7 @@
     }
 
     .contact-block-label {
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 12px;
         font-style: normal;
         font-weight: 700;
@@ -535,7 +535,7 @@
     }
 
     .label-input {
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 12px;
         font-style: normal;
         font-weight: 700;
@@ -554,7 +554,7 @@
     }
 
     .contact-block-label {
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 11px;
         font-style: normal;
         font-weight: 700;

@@ -64,7 +64,7 @@
     .modal-description {
         width: 360px;
         text-align: center;
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 13px;
         font-style: normal;
         font-weight: 500;

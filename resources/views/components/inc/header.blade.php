@@ -319,7 +319,7 @@
 
     .search-item-title {
         font-size: 13px;
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-style: normal;
         font-weight: 600;
         line-height: 18px;
@@ -370,8 +370,8 @@
         position: sticky;
         top: 0;
         width: 100%;
-        height: 94px;
-        z-index: 1000;
+        height: 113px;
+        z-index: 1001;
         box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.08);
     }
 
@@ -399,11 +399,6 @@
         height: 24px;
     }
 
-    header.fixed .logo {
-        width: 114px;
-        height: 58px;
-        object-fit: cover;
-    }
 
     header.fixed .header-inner {
         padding-top: 21px;
@@ -460,7 +455,7 @@
     }
 
     .logo {
-        height: 98px;
+        height: 82px;
         object-fit: cover;
         width: auto;
     }
@@ -634,7 +629,7 @@
     .menu-item-title {
         text-align: center;
         font-size: 13px;
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-style: normal;
         font-weight: 500;
         line-height: 20px;
@@ -794,7 +789,7 @@
     }
 
     .mobile-link-text {
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 13px;
         font-style: normal;
         font-weight: 700;
@@ -993,7 +988,7 @@
 
     .search-item-title {
         font-size: 13px;
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-style: normal;
         font-weight: 600;
         line-height: 18px;
@@ -1076,7 +1071,7 @@
 
     .menu-item-title {
         text-align: center;
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 12px;
         font-style: normal;
         font-weight: 500;

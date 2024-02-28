@@ -34,7 +34,7 @@
 
     .product-title {
         text-align: center;
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 15px;
         font-style: normal;
         font-weight: 600;
@@ -43,7 +43,7 @@
 
     .product-description {
         text-align: center;
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 13px;
         font-style: normal;
         font-weight: 400;
@@ -60,7 +60,7 @@
         background: var(--color-red);
         z-index: 1;
         text-align: center;
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 12px;
         font-style: normal;
         font-weight: 600;
@@ -103,7 +103,7 @@
 
     .product-title {
         text-align: center;
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 16px;
         font-style: normal;
         font-weight: 600;
@@ -112,7 +112,7 @@
 
     .product-description {
         text-align: center;
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
@@ -129,7 +129,7 @@
         background: var(--color-red);
         z-index: 1;
         text-align: center;
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 12px;
         font-style: normal;
         font-weight: 600;

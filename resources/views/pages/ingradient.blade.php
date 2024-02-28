@@ -162,7 +162,7 @@
     .last-card li,
     .last-card p {
         margin-top: 6px;
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 18px;
         font-style: normal;
         font-weight: 300;

@@ -437,7 +437,7 @@
     }
 
     .marker-desc {
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 13px;
         font-style: normal;
         font-weight: 500;
@@ -475,7 +475,7 @@
     }
 
     .location-shop-desc {
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
@@ -503,7 +503,7 @@
     }
 
     .location-shop-contact-title {
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 12px;
         font-style: normal;
         font-weight: 700;
@@ -512,7 +512,7 @@
     }
 
     .location-shop-contact-item {
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
@@ -711,7 +711,7 @@
     }
 
     .location-shop-desc {
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
@@ -739,7 +739,7 @@
     }
 
     .location-shop-contact-title {
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 12px;
         font-style: normal;
         font-weight: 700;
@@ -748,7 +748,7 @@
     }
 
     .location-shop-contact-item {
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
@@ -795,7 +795,7 @@
     }
 
     .marker-desc {
-        font-family: 'Alice';
+        font-family: "Istok Web", sans-serif ;
         font-size: 12px;
         font-style: normal;
         font-weight: 500;
