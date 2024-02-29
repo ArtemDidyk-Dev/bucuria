@@ -1,11 +1,17 @@
 <a href="{{ route('product', [$item->slug], false) }}" class="card-product">
-
     @foreach ($item->tags as $tag)
         <div class="card-icon color-white">{{ $tag->title }}</div>
         <div class="card-icon-triangle"></div>
     @endforeach
- 
-    <img src="{{ $item->image }}" alt="">
+    @if($item->image_hover)
+        <div class="hover-switch">
+            <img src="{{ $item->image }}" alt="{{ $item->title }}">
+            <img src="{{ $item->image_hover }}" alt="{{ $item->title }}">
+        </div>
+    @else
+        <img src="{{ $item->image }}" alt="">
+    @endif
+
     <div class="product-title color-black">{{ $item->title }}</div>
     <div class="product-description color-grey">{{ $item->weight ? $item->weight->title : '' }}</div>
 </a>
@@ -34,7 +40,7 @@
 
     .product-title {
         text-align: center;
-        font-family: "Istok Web", sans-serif ;
+        font-family: "Istok Web", sans-serif;
         font-size: 15px;
         font-style: normal;
         font-weight: 600;
@@ -43,7 +49,7 @@
 
     .product-description {
         text-align: center;
-        font-family: "Istok Web", sans-serif ;
+        font-family: "Istok Web", sans-serif;
         font-size: 13px;
         font-style: normal;
         font-weight: 400;
@@ -60,7 +66,7 @@
         background: var(--color-red);
         z-index: 1;
         text-align: center;
-        font-family: "Istok Web", sans-serif ;
+        font-family: "Istok Web", sans-serif;
         font-size: 12px;
         font-style: normal;
         font-weight: 600;
@@ -79,6 +85,21 @@
         background: #960003;
         z-index: -1;
     }
+    .hover-switch img {
+        width: 140px
+    }
+    .hover-switch img:last-child {
+        display: none;
+    }
+
+    .hover-switch:hover img:last-child {
+        display: block;
+    }
+
+    .hover-switch:hover img:first-child {
+        display: none;
+    }
+
 </style>
 @mobilecss
 <style>
@@ -103,7 +124,7 @@
 
     .product-title {
         text-align: center;
-        font-family: "Istok Web", sans-serif ;
+        font-family: "Istok Web", sans-serif;
         font-size: 16px;
         font-style: normal;
         font-weight: 600;
@@ -112,7 +133,7 @@
 
     .product-description {
         text-align: center;
-        font-family: "Istok Web", sans-serif ;
+        font-family: "Istok Web", sans-serif;
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
@@ -129,7 +150,7 @@
         background: var(--color-red);
         z-index: 1;
         text-align: center;
-        font-family: "Istok Web", sans-serif ;
+        font-family: "Istok Web", sans-serif;
         font-size: 12px;
         font-style: normal;
         font-weight: 600;

@@ -393,6 +393,24 @@
     .catalog-cards-block {
         margin-left: 50px;
     }
+    .checkbox-image.hover-active {
+        opacity: 0;
+        position: absolute;
+        top: -21px;
+        z-index: 999;
+        border-radius: 8px;
+        left: 50%;
+        transform: translate(-50%);
+        transition: .3s;
+    }
+
+    .checkbox:nth-child(1) .checkbox-image.hover-active {
+        top: 2px;
+    }
+
+    .checkbox:hover .checkbox-image.hover-active {
+        opacity: 1;
+    }
 </style>
 @mobilecss
 <style>
@@ -466,6 +484,7 @@
         overflow-y: hidden;
         scroll-snap-type: x mandatory;
         scroll-behavior: smooth;
+        padding: 10px;
     }
 
     .filter-block {
@@ -703,6 +722,24 @@
 
     .panel-images .checkbox-image-wrapper:nth-child(5n) {
         margin-right: 0;
+    }
+    .checkbox-image.hover-active {
+        opacity: 0;
+        position: absolute;
+        top: -21px;
+        z-index: 999;
+        border-radius: 8px;
+        left: 50%;
+        transform: translate(-50%);
+        transition: .3s;
+    }
+
+    .checkbox:nth-child(1) .checkbox-image.hover-active {
+        top: 2px;
+    }
+
+    .checkbox:hover .checkbox-image.hover-active {
+        opacity: 1;
     }
 
 </style>

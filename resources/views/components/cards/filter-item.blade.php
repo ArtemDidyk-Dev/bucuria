@@ -1,4 +1,4 @@
-<a href="{{ route('catalog', [$item->slug], false) }}" class="filter-product-item">
+<a href="{{ route('catalog', [$item->slug], false) }}" class="filter-product-item {{ $item->active ? 'active' : '' }}">
     <img src="{{ $item->image }}" class="filter-product-img">
     <div class="filter-product-item-title {{ $item->active ? 'active' : '' }}">{{ $item->title }}</div>
 </a>
@@ -46,9 +46,29 @@
         transition: .3s;
     }
 
+    .filter-product-img {
+        transition: .3s;
+        border: 3px solid transparent;
+    }
+    .filter-product-item {
+        transition: .3s;
+    }
+
     .filter-product-item-title.active,
     .filter-product-item:hover .filter-product-item-title {
         color: var(--color-red);
+    }
+
+    .filter-product-item:hover .filter-product-img{
+        border: 3px solid #C81317;
+    }
+
+    .filter-product-item.active img {
+        border: 3px solid #C81317;
+    }
+
+    .filter-product-item:hover {
+        transform: translateZ(-1px) scale(1.2);
     }
 </style>
 
@@ -97,6 +117,20 @@
     .filter-product-item-title.active,
     .filter-product-item:hover .filter-product-item-title {
         color: var(--color-red);
+    }
+    .filter-product-img {
+        transition: .3s;
+        border: 3px solid transparent;
+    }
+    .filter-product-item {
+        transition: .3s;
+    }
+
+    .filter-product-item:hover .filter-product-img{
+        border: 3px solid #C81317;
+    }
+    .filter-product-item:hover {
+        transform: translateZ(-1px) scale(1.2);
     }
 </style>
 @endcss

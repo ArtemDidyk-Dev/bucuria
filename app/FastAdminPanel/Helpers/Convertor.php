@@ -13,11 +13,11 @@ class Convertor
         'desktop'   => 'css/desktop-src.css',
         'mobile'    => 'css/mobile-src.css',
     ];
-    
+
     public static $views = [];
 
     public static function create ($view, $style, $isDesktop = false)
-    {            
+    {
         if ($isDesktop) {
             self::$views['desktop'][$view] = $style;
         } else {
@@ -32,11 +32,11 @@ class Convertor
 
         $cacheDir = public_path()."/css/cache";
         $cssDir = "/css/cache";
-        
+
         $componentsDir = resource_path().'/views/';
 
         if (!empty(request()->attributes->get('controllerName'))) {
-            
+
             $method = request()->attributes->get('controllerName');
 
         } elseif (!empty(request()->route()->getAction()['controller'])) {
@@ -51,15 +51,15 @@ class Convertor
         $pageName = strtolower(
             str_replace(
                 [
-                    'App\Http\Controllers\\', 
-                    '@', 
+                    'App\Http\Controllers\\',
+                    '@',
                     'Controller'
-                ], 
+                ],
                 [
-                    '', 
+                    '',
                     '_',
                     ''
-                ], 
+                ],
                 $method
             )
         );
@@ -82,7 +82,7 @@ class Convertor
                 foreach (self::$views['desktop'] as $key => $view){
 
                     $key = str_replace('.', '/', $key);
-    
+
                     $cacheTime += $base_time - filemtime($componentsDir.$key.'.blade.php');
                 }
             }
@@ -107,7 +107,7 @@ class Convertor
         $styleFiles = [];
 
         foreach (['desktop', 'mobile'] as $device) {
-            
+
             $styleFiles[$device] = file_get_contents(self::$style_source_path[$device]);
 
             if (isset(self::$views[$device])) {
@@ -118,7 +118,7 @@ class Convertor
                 }
             }
         }
-        
+
         $styles = '@media (min-width: 1600px) { ';
         $styles .= $styleFiles['desktop'];
         $styles .= ' }';
@@ -127,13 +127,13 @@ class Convertor
         $styles .= self::pxToVw($styleFiles['desktop'], self::$width['desktop'], 'desktop');
         $styles .= ' }';
 
-        $styles .= self::addTabletMedia(); 
+        $styles .= self::addTabletMedia();
         $styles .= '@media (max-width: 1000px) { ';
         $styles .= self::pxToVw($styleFiles['mobile'], self::$width['mobile'], 'mobile');
         $styles .= ' }';
 
         file_put_contents($pageCss, $styles);
-        touch($pageCss, $cacheTime);
+//        touch($pageCss, $cacheTime);
 
         return "<link rel='stylesheet' href='".$cssDir."/".$pageName.$hash.".css?v=".filemtime($cacheDir.'/'.$pageName.$hash.'.css')."'>";
     }
@@ -149,13 +149,13 @@ class Convertor
 
         for ($i = 0; $i < count($matches[0]); $i++) {
 
-            if ($matches[0][$i] == ' 1px' || 
-                $matches[0][$i] == ' 2px' || 
-                $matches[0][$i] == ' 3px' || 
-                $matches[0][$i] == ' -1px' || 
-                $matches[0][$i] == ' -2px' || 
+            if ($matches[0][$i] == ' 1px' ||
+                $matches[0][$i] == ' 2px' ||
+                $matches[0][$i] == ' 3px' ||
+                $matches[0][$i] == ' -1px' ||
+                $matches[0][$i] == ' -2px' ||
                 $matches[0][$i] == ' -3px'){
-                    
+
                     continue;
             }
 
@@ -166,12 +166,12 @@ class Convertor
             if ($platform == 'mobile'){
 
                 $styles = str_replace($matches[0][$i], ' calc('.$vw.'vw * var(--coef-w))', $styles);
-            
+
             } else {
 
                 $styles = str_replace($matches[0][$i], ' '.$vw.'vw', $styles);
-            } 
-            
+            }
+
         }
 
         return $styles;
@@ -180,7 +180,7 @@ class Convertor
 
     public static function addTabletMedia()
     {
-        return 
+        return
         '@media (min-width: calc(494px)) and (max-width: calc(1000px)) {
             body {
                 --coef-w: calc(var(--width) / -910 + 1.3771);
@@ -197,5 +197,5 @@ class Convertor
             }
         }
         ';
-    } 
+    }
 }
