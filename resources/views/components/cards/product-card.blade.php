@@ -169,6 +169,17 @@
         background: #960003;
         z-index: -1;
     }
+    .hover-switch img:last-child {
+        display: none;
+    }
+
+    .hover-switch:active img:last-child {
+        display: block;
+    }
+
+    .hover-switch:active img:first-child {
+        display: none;
+    }
 </style>
 @endcss
 
