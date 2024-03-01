@@ -86,7 +86,7 @@
         z-index: -1;
     }
     .hover-switch img {
-        width: 140px
+        width: 100%;
     }
     .hover-switch img:last-child {
         display: none;
