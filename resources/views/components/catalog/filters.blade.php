@@ -85,4 +85,94 @@
         </div>
     </div>
 
+    <div class="filter-item filter-item-checkbox" data-id="weight">
+        <div class="accordion-btn accordion-filters-box active">
+            <div class="accordion filter">The weight</div>
+            <img src="/images/icons/arrow-filter.svg" class="arrow-filter">
+        </div>
+        <div class="filters-box active">
+            <div class="filters-input-prices">
+                <div class="filters-input-price">
+                    <div class="input-wrapper-label">
+                        Min weight, kg
+                    </div>
+                    <label class="input-wrapper">
+                        <input data-minprice="22" name="minPrice" type="text" class="input-text " placeholder="" value="8">
+                    </label>
+                </div>
+                <div class="filters-input-price">
+                    <div class="input-wrapper-label">
+                        Max weight, kg
+                    </div>
+                    <label class="input-wrapper">
+                        <input data-maxprice="81" name="maxPrice" type="text" class="input-text " placeholder="" value="81">
+                    </label>
+                </div>
+            </div>
+            <div id="price-slider" class="price-slider"></div>
+        </div>
+    </div>
+
+
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const slider = document.getElementById('price-slider');
+        const accordionBtn = document.querySelector(".accordion-filters-box");
+        const filtersBox = document.querySelector('.filters-box');
+        accordionBtn.addEventListener('click', (e)=> {
+            filtersBox.classList.toggle('active');
+            accordionBtn.classList.toggle('active');
+        })
+        if (slider) {
+            let form = document.querySelector('.filters')
+            let min = 0
+            let max = 90
+            let inputMin = document.querySelector('[data-minPrice]');
+            let inputMax = document.querySelector('[data-maxPrice]');
+            let tooltips = [document.createElement('span'), document.createElement('span')];
+
+            noUiSlider.create(slider, {
+                start: [min, max],
+                connect: true,
+                range: {
+                    'min': min,
+                    'max': max
+                }
+
+            });
+
+            slider.noUiSlider.on('update', function(values, handle) {
+                let minValue = parseInt(values[0]);
+                let maxValue = parseInt(values[1]);
+                let circles = document.querySelectorAll(".noUi-touch-area");
+                let minCircle = circles[0];
+                let maxCircle = circles[1];
+                inputMin.value = minValue;
+                inputMax.value = maxValue;
+                tooltips[handle].innerHTML = values[handle];
+                tooltips[handle].classList.add('nouislider-tooltip');
+                minCircle.innerHTML = `<span class="min-circle">${minValue}</span>`
+                maxCircle.innerHTML = `<span class="max-circle">${maxValue}</span>`
+            });
+
+            let minCountInput = min;
+            let maxCountInput = max;
+
+            inputMin.addEventListener("input", (e) => {
+                inputMin.setAttribute('value', e.target.value);
+                minCountInput = e.target.value;
+                slider.noUiSlider.set([minCountInput, maxCountInput]);
+            });
+
+            inputMax.addEventListener("input", (e) => {
+                inputMax.setAttribute('value', e.target.value);
+                maxCountInput = e.target.value;
+                setTimeout(() => {
+                    slider.noUiSlider.set([minCountInput, maxCountInput]);
+                }, 1500);
+            });
+        }
+
+    });
+</script>

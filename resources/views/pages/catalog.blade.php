@@ -411,6 +411,50 @@
     .checkbox:hover .checkbox-image.hover-active {
         opacity: 1;
     }
+
+    .filters-input-prices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 13px;
+    }
+    .input-wrapper-label {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 20px;
+        color: #747474;
+        margin-bottom: 6px;
+    }
+    .input-wrapper {
+        border: 1px solid #D9D9D9;
+        border-radius: 8px;
+        position: relative;
+        display: flex;
+    }
+    .input-text {
+        width: 100%;
+        padding: 8px 15px;
+        border: 0;
+        border-radius: 8px;
+    }
+    .accordion-filters-box {
+        padding-bottom: 18px;
+    }
+    .price-slider {
+        margin-top: 62px;
+    }
+
+    .filters-box {
+        max-height: 0;
+        transition: .3s;
+        opacity: 0;
+    }
+    .filters-box.active{
+        max-height: 132px;
+        opacity: 1;
+    }
+    .accordion-filters-box.active .arrow-filter {
+        transform: rotate(-90deg);
+    }
 </style>
 @mobilecss
 <style>
@@ -502,6 +546,8 @@
         height: var(--app-height);
         left: 0;
         right: 0;
+        overflow: scroll;
+        padding-bottom: 20px
     }
 
     .filter-img {
@@ -741,10 +787,56 @@
     .checkbox:hover .checkbox-image.hover-active {
         opacity: 1;
     }
+    .filters-input-prices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 13px;
+    }
+    .input-wrapper-label {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 20px;
+        color: #747474;
+        margin-bottom: 6px;
+    }
+    .input-wrapper {
+        border: 1px solid #D9D9D9;
+        border-radius: 8px;
+        position: relative;
+        display: flex;
+    }
+    .input-text {
+        width: 100%;
+        padding: 8px 15px;
+        border: 0;
+        border-radius: 8px;
+    }
+    .accordion-filters-box {
+        padding-bottom: 18px;
+    }
+    .price-slider {
+        margin-top: 52px;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
 
+    .filters-box {
+        max-height: 0;
+        transition: .3s;
+        opacity: 0;
+    }
+    .filters-box.active{
+        max-height: 132px;
+        opacity: 1;
+    }
+    .accordion-filters-box.active .arrow-filter {
+        transform: rotate(-90deg);
+    }
 </style>
 @endcss
 
 @startjs
-<script></script>
+<script>
+
+</script>
 @endjs

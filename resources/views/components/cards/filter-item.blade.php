@@ -1,5 +1,7 @@
 <a href="{{ route('catalog', [$item->slug], false) }}" class="filter-product-item {{ $item->active ? 'active' : '' }}">
-    <img src="{{ $item->image }}" class="filter-product-img">
+    <div class="filter-product-img-box">
+        <img src="{{ $item->image }}" class="filter-product-img">
+    </div>
     <div class="filter-product-item-title {{ $item->active ? 'active' : '' }}">{{ $item->title }}</div>
 </a>
 
@@ -23,11 +25,18 @@
     }
 
     .filter-product-img {
-        width: 190px;
-        height: 190px;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
         border-radius: 50%;
+    }
+    .filter-product-img-box {
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        overflow: hidden;
         margin-bottom: 10px;
+
     }
 
     .filter-product-item-title {
@@ -48,7 +57,6 @@
 
     .filter-product-img {
         transition: .3s;
-        border: 3px solid transparent;
     }
     .filter-product-item {
         transition: .3s;
@@ -58,17 +66,25 @@
     .filter-product-item:hover .filter-product-item-title {
         color: var(--color-red);
     }
+    .filter-product-img-box {
+        border: 3px solid transparent;
+    }
+
+    .filter-product-item:hover .filter-product-img-box{
+        border: 3px solid #C81317;
+    }
+    .filter-product-img-box {
+        transition: .3s;
+    }
+    .filter-product-item.active .filter-product-img-box {
+        border: 3px solid #C81317;
+    }
 
     .filter-product-item:hover .filter-product-img{
-        border: 3px solid #C81317;
-    }
-
-    .filter-product-item.active img {
-        border: 3px solid #C81317;
-    }
-
-    .filter-product-item:hover {
         transform: translateZ(-1px) scale(1.2);
+    }
+    .filter-product-item:hover .filter-product-img-box {
+        border: 3px solid #C81317;
     }
 </style>
 
@@ -91,11 +107,19 @@
     }
 
     .filter-product-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 70px;
+        margin-bottom: 10px;
+    }
+    .filter-product-img-box {
         width: 70px;
         height: 70px;
         object-fit: cover;
         border-radius: 70px;
         margin-bottom: 10px;
+        overflow: hidden;
     }
 
     .filter-product-item-title {
@@ -114,23 +138,28 @@
         transition: .3s;
     }
 
-    .filter-product-item-title.active,
-    .filter-product-item:hover .filter-product-item-title {
-        color: var(--color-red);
+    .filter-product-img-box {
+        border: 2px solid transparent;
     }
-    .filter-product-img {
-        transition: .3s;
-        border: 3px solid transparent;
+
+    .filter-product-item:hover .filter-product-img-box{
+        border: 2px solid #C81317;
     }
-    .filter-product-item {
+    .filter-product-img-box {
         transition: .3s;
+    }
+    .filter-product-item.active .filter-product-img-box {
+        border: 2px solid #C81317;
     }
 
     .filter-product-item:hover .filter-product-img{
-        border: 3px solid #C81317;
-    }
-    .filter-product-item:hover {
         transform: translateZ(-1px) scale(1.2);
+    }
+    .filter-product-item:hover .filter-product-img-box {
+        border: 2px solid #C81317;
+    }
+    .filter-product-img {
+        transition: .3s;
     }
 </style>
 @endcss
