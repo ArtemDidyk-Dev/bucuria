@@ -18,6 +18,7 @@ class Career extends Model
         'message',
         'date',
         'file',
+        'department'
     ];
 
 }

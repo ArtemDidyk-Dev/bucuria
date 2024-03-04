@@ -25,6 +25,7 @@ class CareerRequest extends FormRequest
     {
         $this->merge([
             'type'  => strval($this->type),
+            'department' => strval($this->department),
         ]);
     }
 
@@ -36,6 +37,7 @@ class CareerRequest extends FormRequest
             'type'      => ['nullable'],
             'message'   => ['required', 'string'],
             'file'	    => ['nullable', 'mimes:png,jpg,jpeg,pdf,docx,doc'],
+            'department' => ['nullable'],
         ];
 
         return $rules;

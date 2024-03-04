@@ -11,22 +11,22 @@
             @endif
             <span>{{ $current }}</span>
         </div>
-        <input 
-            type="text" 
-            class="input-select" 
-            name="{{ $name }}" 
-            value="{{ $value }}" 
-            @if($required) 
-                required 
-            @endif 
+        <input
+            type="text"
+            class="input-select"
+            name="{{ $name }}"
+            value="{{ $value }}"
+            @if($required)
+                required
+            @endif
         >
         <div class="select-items">
             <div class="select-items-inner">
                 @foreach ($items as $item)
-                    <div class="extra-text select-item color-text" 
-                        data-value="{{ $item['value'] }}" 
-                        {{ $attributes->merge([ 'onclick' => "changeSelect(this); ".$action ]) }} 
-                    >{{ $item['title'] }}</div>    
+                    <div class="extra-text select-item color-text"
+                        data-value="{{ $item['value'] }}"
+                        {{ $attributes->merge([ 'onclick' => "changeSelect(this); ".$action ]) }}
+                    >{{ $item['title'] }}</div>
                 @endforeach
             </div>
         </div>
@@ -179,7 +179,7 @@
         cursor: pointer;
     }
 
-    .select-title, 
+    .select-title,
     .select-item {
         font-size: 11px;
         font-style: normal;
@@ -287,7 +287,7 @@
 
 @startjs
 <script>
-    
+
     function selectClick(elm){
         elm.parentElement.classList.toggle('active');
     }
@@ -296,24 +296,24 @@
         document.querySelectorAll('.select').forEach(select => {
             if ((!select.contains(e.target) && select.classList.contains('active'))){
                 select.classList.remove('active');
-            } 
+            }
         });
     });
 
     function changeSelect(elm) {
 
         const id_input = elm.closest('.select-wrapper').querySelector('input').getAttribute('name')
-        
+
         elm.closest('.select-wrapper').querySelector('.input-error').style.display = 'none'
 
         const value = elm.dataset.value
         const text = elm.innerText
 
-        const event = new CustomEvent('change_select_'+id_input, { 
+        const event = new CustomEvent('change_select_'+id_input, {
             detail: {
                 select_value: value,
                 select_title: text,
-            }, 
+            },
         });
 
         document.dispatchEvent(event)
@@ -329,7 +329,7 @@
 
             let checkedElem = document.createElement('span');
             checkedElem.innerText = text
-            elm.closest('.select').appendChild(checkedElem)    
+            elm.closest('.select').appendChild(checkedElem)
 
         } else {
 
@@ -341,9 +341,9 @@
 
             elm.closest('.select').querySelector('.select-title').classList.add('active')
         } else {
-            
+
             elm.closest('.select').querySelector('.select-title').classList.remove('active')
-        } 
+        }
 
         document.querySelectorAll('.select').forEach(select => {
             select.classList.remove('active');
