@@ -8,11 +8,12 @@ class Form extends Component
 {
     public $nocv;
     public $type;
-    
-    public function __construct($nocv = false, $type = false)
+    public $department;
+    public function __construct($nocv = false, $type = false, $department = false)
     {
         $this->nocv = $nocv;
         $this->type = $type;
+        $this->department = $department;
     }
 
     public function render()
