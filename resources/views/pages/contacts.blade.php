@@ -180,7 +180,7 @@
 
     .google-maps-title {
         width: 300px;
-        margin-left: 20px;
+        margin-left: 86px;
     }
 
     .contact-block-label {
@@ -191,6 +191,7 @@
         line-height: 22px;
         text-transform: uppercase;
         margin-bottom: 4px;
+        max-width: 125px;
     }
 
     .breadcrumbs-block {
