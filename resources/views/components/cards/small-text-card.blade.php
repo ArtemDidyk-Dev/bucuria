@@ -1,24 +1,24 @@
 <div class="container">
     <div class="big-social-section">
         <div class="big-social-card">
-            
+
             <img src="/images/small-socia.png" alt="" class="big-social-card-img desktop">
             <img src="/images/small-social-mobile.png" alt="" class="big-social-card-img mobile">
 
             <div class="big-social-card-content">
                 @if (!empty($title))
                     <div class="card-social-title h4 color-white">
-                        {!! $title !!} 
+                        {!! $title !!}
                     </div>
                 @endif
                 <div class="card-social-desc extra-text color-white {{ empty($title) ? 'no-mt' : '' }}">
-                    {!! $description !!} 
+                    {!! $description !!}
                 </div>
             </div>
         </div>
-        <x-cards.small-card-image 
-            :image="$image" 
-            :imagemob="$image" 
+        <x-cards.small-card-image
+            :image="$image"
+            :imagemob="$image"
         />
     </div>
 </div>
@@ -50,10 +50,11 @@
     .big-social-card-content {
         display: block;
         position: absolute;
-        top: 168px;
+        top: 50%;
         left: 80px;
         z-index: 1;
         width: 470px;
+        transform: translateY(-50%);
     }
 
     .card-social-title {
@@ -63,6 +64,7 @@
     }
 
     .card-social-desc {
+        flex-direction: column;
         display: flex;
         justify-content: flex-start;
         margin-top: 15px;
@@ -141,6 +143,9 @@
         padding-right: 15px;
         padding-top: 101px;
         padding-bottom: 101px;
+
+        top: 50%;
+        transform: translateY(-50%);
     }
 
     .card-social-title {
@@ -152,9 +157,13 @@
 
     .card-social-desc {
         display: flex;
+        flex-direction: column;
         justify-content: flex-start;
         margin-top: 15px;
         width: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        max-height: calc(115vw* var(--coef-w));
     }
 
     .social-icons {
