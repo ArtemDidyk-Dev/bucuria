@@ -11,7 +11,9 @@
 
                 @if ($description)
                     <div class="history-card-desc main-text color-white">
-                        {{ $description }}
+                        <div class="box history-box">
+                            {{ $description }}
+                        </div>
                     </div>
                 @endif
             </div>
@@ -40,6 +42,20 @@
 
 @desktopcss
 <style>
+    .history-card-desc {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 450px;
+        padding-right: 10px;
+    }
+    .history-card-desc::-webkit-scrollbar {
+        width: 2px;
+        background: rgba(31, 31, 31, 0.08);
+
+    }
+    .history-card-desc::-webkit-scrollbar-thumb {
+        background-color: #fff;
+    }
     .history-card-red {
         width: auto;
         height: 583px;

@@ -57,14 +57,16 @@
         <div class="container">
             <div class="year-menu">
                 @foreach ($cards_items as $key => $item)
-                    <a href="#{{ $key }}" class="year-link color-white" id="year-{{ $key }}">{{ $item[0] }}</a>
+                    @if(!empty($item[0]))
+                        <a href="#{{ $key }}" class="year-link color-white" id="year-{{ $key }}">{{ $item[0] }}</a>
+                    @endif
                 @endforeach
             </div>
         </div>
     </div>
 
 
-    <div class="big-card-height-small-section">
+    <div class="big-card-height-small-section history">
         <div class="container">
             <x-cards.big-card-height-small
                 title="{{ $s->field('Блок 1', 'Заголовок', 'text', true, 'Life is sweeter with us…') }}"
@@ -86,7 +88,7 @@
             <x-cards.big-image-card
                 title="{{ $s->field('Блок 2', 'Заголовок', 'textarea', true, 'We have over 300 products in our range!') }}"
                 description="{{ $s->field('Блок 2', 'Текст', 'textarea', true, 'You will 100% find something for yourself from the abundance of sweets') }}"
-                image="{{ $s->field('Блок 2', 'Изображение', 'photo', false, '/images/image-card3.png') }}" 
+                image="{{ $s->field('Блок 2', 'Изображение', 'photo', false, '/images/image-card3.png') }}"
                 :btn-text="$s->field('Блок 2','Кнопка текст','text',true,'Read more')"
                 :link="$s->field('Блок 2','Кнопка ссылка','text',false,'/catalog')"
                 center
@@ -104,7 +106,7 @@
             $(window).on("scroll", function() {
                 const scrollOffset = this.scrollY
                 historyBlocks.forEach(historyBlock => {
-                    
+
                     if (scrollOffset > historyBlock.offsetTop - headerHeight) {
                         document.querySelector('#year-'+historyBlock.getAttribute('id')).classList.add('active')
                     } else {
@@ -135,6 +137,13 @@
 </x-layout>
 @desktopcss
 <style>
+    .history .card-title-small.h2.color-red {
+        text-transform: none;
+    }
+
+    .history-card-title .h3{
+        text-transform: none;
+    }
     .breadcrumbs-last {
         color: var(--color-white);
     }
@@ -326,6 +335,12 @@
 </style>
 @mobilecss
 <style>
+    .history .card-title-small.h2.color-red {
+        text-transform: none;
+    }
+    .history-card-title .h3{
+        text-transform: none;
+    }
     .year-menu {
         display: flex;
         justify-content: flex-start;

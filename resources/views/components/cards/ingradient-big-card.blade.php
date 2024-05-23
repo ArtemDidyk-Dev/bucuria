@@ -9,7 +9,6 @@
         <div class="ingradient-big-card-desc main-text color-white">
             {!! $description !!}
 
-
         </div>
     </div>
 </div>
@@ -40,7 +39,7 @@
     .ingradient-big-card-title {
         display: flex;
         justify-content: flex-start;
-        width: 1000px;
+        width: 100%;
         text-transform: uppercase;
     }
 
@@ -48,7 +47,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        width: 1000px;
+        width: 100%;
     }
 
     .ingradient-big-card-desc p {
