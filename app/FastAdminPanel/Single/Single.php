@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 namespace App\FastAdminPanel\Single;
 
 use App\FastAdminPanel\Models\SinglePage;
 use App\FastAdminPanel\Models\SingleField;
 use App\FastAdminPanel\Single\SingleRepeated;
+
 
 class Single
 {
@@ -25,14 +26,15 @@ class Single
 
 	public function field($field_block, $field_title, $type = null, $is_multilanguage = null, $default_val = '')
 	{
-		$field = $this->fields[0][$field_block . $field_title];
+        if (!empty($this->fields[0][$field_block . $field_title])) {
+            $field = $this->fields[0][$field_block . $field_title];
+            if ($field->type == 'repeat') {
 
-		if ($field->type == 'repeat') {
+                return new SingleRepeated($this->fields, $field->id, intval($field->value), []);
+            }
+            return $field->decodeValue($field->value);
+        }
 
-			return new SingleRepeated($this->fields, $field->id, intval($field->value), []);
-		}
-
-		return $field->decodeValue($field->value);
 	}
 
 	protected function formatFields($fields)

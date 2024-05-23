@@ -250,6 +250,11 @@ class CatalogService
         return route('catalog', [], false);
     }
 
+
+    public function getActiveCategory() {
+       return $this->category->slug;
+    }
+
     public function getBreadcrumbs()
     {
         $s = new Single('Продукты', 10, 1);

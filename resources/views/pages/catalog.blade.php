@@ -46,7 +46,10 @@
                     <div class="content-catalog-block">
                     <div id="filters" class="filter-block">
                         <x-catalog.filters :tastes="$tastes" :weights="$weights" :clearRoute="$clearRoute" :activeTastes="$activeTastes"
-                            :activeWeights="$activeWeights" />
+                            :activeWeights="$activeWeights" activeCategory={{$activeCategory}} />
+                        <x-inputs.download href="{{$s->field('Каталог', 'Файл', 'photo', true)}}">
+                            {{$s->field('Каталог', 'Текст кнопки', 'text', true, 'download catalog')}}
+                        </x-inputs.download>
                     </div>
 
                     <div class="catalog-cards-block">
@@ -390,6 +393,68 @@
     .catalog-cards-block {
         margin-left: 50px;
     }
+    .checkbox-image.hover-active {
+        opacity: 0;
+        position: absolute;
+        top: -21px;
+        z-index: 999;
+        border-radius: 8px;
+        left: 50%;
+        transform: translate(-50%);
+        transition: .3s;
+    }
+
+    .checkbox:nth-child(1) .checkbox-image.hover-active {
+        top: 2px;
+    }
+
+    .checkbox:hover .checkbox-image.hover-active {
+        opacity: 1;
+    }
+
+    .filters-input-prices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 13px;
+    }
+    .input-wrapper-label {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 20px;
+        color: #747474;
+        margin-bottom: 6px;
+    }
+    .input-wrapper {
+        border: 1px solid #D9D9D9;
+        border-radius: 8px;
+        position: relative;
+        display: flex;
+    }
+    .input-text {
+        width: 100%;
+        padding: 8px 15px;
+        border: 0;
+        border-radius: 8px;
+    }
+    .accordion-filters-box {
+        padding-bottom: 18px;
+    }
+    .price-slider {
+        margin-top: 62px;
+    }
+
+    .filters-box {
+        max-height: 0;
+        transition: .3s;
+        opacity: 0;
+    }
+    .filters-box.active{
+        max-height: 132px;
+        opacity: 1;
+    }
+    .accordion-filters-box.active .arrow-filter {
+        transform: rotate(-90deg);
+    }
 </style>
 @mobilecss
 <style>
@@ -463,6 +528,7 @@
         overflow-y: hidden;
         scroll-snap-type: x mandatory;
         scroll-behavior: smooth;
+        padding: 10px;
     }
 
     .filter-block {
@@ -480,6 +546,8 @@
         height: var(--app-height);
         left: 0;
         right: 0;
+        overflow: scroll;
+        padding-bottom: 20px
     }
 
     .filter-img {
@@ -701,10 +769,74 @@
     .panel-images .checkbox-image-wrapper:nth-child(5n) {
         margin-right: 0;
     }
+    .checkbox-image.hover-active {
+        opacity: 0;
+        position: absolute;
+        top: -21px;
+        z-index: 999;
+        border-radius: 8px;
+        left: 50%;
+        transform: translate(-50%);
+        transition: .3s;
+    }
 
+    .checkbox:nth-child(1) .checkbox-image.hover-active {
+        top: 2px;
+    }
+
+    .checkbox:hover .checkbox-image.hover-active {
+        opacity: 1;
+    }
+    .filters-input-prices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 13px;
+    }
+    .input-wrapper-label {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 20px;
+        color: #747474;
+        margin-bottom: 6px;
+    }
+    .input-wrapper {
+        border: 1px solid #D9D9D9;
+        border-radius: 8px;
+        position: relative;
+        display: flex;
+    }
+    .input-text {
+        width: 100%;
+        padding: 8px 15px;
+        border: 0;
+        border-radius: 8px;
+    }
+    .accordion-filters-box {
+        padding-bottom: 18px;
+    }
+    .price-slider {
+        margin-top: 52px;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .filters-box {
+        max-height: 0;
+        transition: .3s;
+        opacity: 0;
+    }
+    .filters-box.active{
+        max-height: 132px;
+        opacity: 1;
+    }
+    .accordion-filters-box.active .arrow-filter {
+        transform: rotate(-90deg);
+    }
 </style>
 @endcss
 
 @startjs
-<script></script>
+<script>
+
+</script>
 @endjs

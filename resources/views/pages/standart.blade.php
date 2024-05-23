@@ -95,7 +95,7 @@
 
     .content p {
         font-size: 18px;
-        font-family: Urbanist;
+        font-family: "Istok Web", sans-serif ;
         font-style: normal;
         font-weight: 300;
         line-height: 30px;
@@ -105,7 +105,7 @@
     .content li {
         margin-top: 15px;
         font-size: 18px;
-        font-family: Urbanist;
+        font-family: "Istok Web", sans-serif ;
         font-style: normal;
         font-weight: 300;
         line-height: 30px;
@@ -179,7 +179,7 @@
     }
 
     .content p {
-        font-family: Urbanist;
+        font-family: "Istok Web", sans-serif ;
         font-size: 16px;
         font-style: normal;
         font-weight: 300;
@@ -190,7 +190,7 @@
     .content li {
         margin-top: 15px;
         font-size: 18px;
-        font-family: Urbanist;
+        font-family: "Istok Web", sans-serif ;
         font-style: normal;
         font-weight: 300;
         line-height: 30px;

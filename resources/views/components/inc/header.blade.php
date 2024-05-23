@@ -6,7 +6,7 @@
             <div class="header-left desktop">
                 {{-- <a href="{{ route('aboutus', false) }}" class="menu color-white">{{ $fields['about'] }}</a> --}}
                 <div class="product-menu-block desktop">
-                    <div class="menu color-white">{{ $fields['about'] }}</div>
+                    <a href="{{ route('aboutus', false) }}" class="menu color-white">{{ $fields['about'] }}</a>
                     <div class="header-menu">
                         <div class="products-menu" id="about-menu">
                             @foreach ($fields['about_menu'] as $aboutMenuItem)
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="product-menu-block desktop">
-                    <div class="menu color-white">{{ $fields['find'] }}</div>
+                    <a href="{{ route('findus', false) }}" class="menu color-white">{{ $fields['find'] }}</a>
                     <div class="header-menu">
                         <div class="products-menu" id="find-menu">
                             @foreach ($fields['find_menu'] as $findMenuItem)
@@ -53,7 +53,7 @@
 
             <div class="header-logo desktop">
                 <a href="{{ route('home', [], false) }}">
-                    <img src="/images/header-logo.svg" alt="" class="logo">
+                    <img width="114" height="58" src="/images/header-logo.svg" alt="" class="logo">
                 </a>
             </div>
 
@@ -319,7 +319,7 @@
 
     .search-item-title {
         font-size: 13px;
-        font-family: Urbanist;
+        font-family: "Istok Web", sans-serif ;
         font-style: normal;
         font-weight: 600;
         line-height: 18px;
@@ -370,8 +370,8 @@
         position: sticky;
         top: 0;
         width: 100%;
-        height: 94px;
-        z-index: 1000;
+        height: 113px;
+        z-index: 1001;
         box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.08);
     }
 
@@ -399,11 +399,6 @@
         height: 24px;
     }
 
-    header.fixed .logo {
-        width: 114px;
-        height: 58px;
-        object-fit: cover;
-    }
 
     header.fixed .header-inner {
         padding-top: 21px;
@@ -456,11 +451,13 @@
         display: flex;
         justify-content: center;
         margin-right: 190px;
+
     }
 
     .logo {
-        height: 98px;
+        height: 82px;
         object-fit: cover;
+        width: auto;
     }
 
     .header-right {
@@ -632,7 +629,7 @@
     .menu-item-title {
         text-align: center;
         font-size: 13px;
-        font-family: Montserrat;
+        font-family: "Istok Web", sans-serif ;
         font-style: normal;
         font-weight: 500;
         line-height: 20px;
@@ -792,7 +789,7 @@
     }
 
     .mobile-link-text {
-        font-family: Urbanist;
+        font-family: "Istok Web", sans-serif ;
         font-size: 13px;
         font-style: normal;
         font-weight: 700;
@@ -991,7 +988,7 @@
 
     .search-item-title {
         font-size: 13px;
-        font-family: Urbanist;
+        font-family: "Istok Web", sans-serif ;
         font-style: normal;
         font-weight: 600;
         line-height: 18px;
@@ -1074,7 +1071,7 @@
 
     .menu-item-title {
         text-align: center;
-        font-family: Montserrat;
+        font-family: "Istok Web", sans-serif ;
         font-size: 12px;
         font-style: normal;
         font-weight: 500;

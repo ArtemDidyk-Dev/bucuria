@@ -1,7 +1,6 @@
 <?php $s = new Single('Карьера', 10, 1); ?>
-
 <form class="form-contact" action="{{ route('send-contact', [], false) }}" onsubmit="send_contact(this); return false;">
-    <div class="form-input-block {{ $type ? 'wrap' : '' }}">
+    <div class="form-input-block {{ $type ? 'wrap' : '' }} {{ $department ? 'wrap' : '' }}">
         <div class="input-block">
             <label for="name"
                 class="label-input color-white">{{ $s->field('Форма обратной связи', 'Описание поля Имя', 'text', true, 'Enter your name') }}</label>
@@ -17,8 +16,8 @@
                 type="email" required name="email">
         </div>
         @if ($type)
-            @php 
-                $supliersSingle = new Single('Партнеры', 5, 1); 
+            @php
+                $supliersSingle = new Single('Партнеры', 5, 1);
                 $types = $supliersSingle->field('Форма обратной связи', 'Тип', 'repeat', true);
                 $typesItems = [];
                 foreach ($types as $elm) {
@@ -28,12 +27,32 @@
                     ];
                 }
             @endphp
-            <x-inputs.select 
-                :label="$s->field('Форма обратной связи', 'Описание поля Type', 'text', true, 'Type of cooperation')" 
+            <x-inputs.select
+                :label="$s->field('Форма обратной связи', 'Описание поля Type', 'text', true, 'Type of cooperation')"
                 name="type"
                 :items="$typesItems"
             />
         @endif
+        @if ($department)
+            @php
+                $supliersSingle = new Single('Контакты', 10, 1);
+                $departments = $supliersSingle->field('Форма обратной связи', 'Отдел', 'repeat', true);
+                $departmentsItems = [];
+                foreach ($departments as $elm) {
+                    $departmentsItems[] = [
+                        'title' => $elm->field('Название', 'text', ''),
+                        'value' => $elm->field('Название', 'text', ''),
+                    ];
+                }
+            @endphp
+            <x-inputs.select
+                :label="$s->field('Форма обратной связи', 'Описание поля Отдел', 'text', true, 'Department')"
+                name="department"
+                :items="$departmentsItems"
+            />
+
+        @endif
+
         <div class="input-block input-block-message">
             <label for="message"
                 class="label-input color-white">{{ $s->field('Форма обратной связи', 'Описание поля Message', 'text', true, 'Message') }}</label>
@@ -92,8 +111,8 @@
 <style>
 
     .form-contact .select {
-        height: 35px;  
-        width: 400px; 
+        height: 35px;
+        width: 400px;
     }
 
     .form-contact .select-title,
@@ -317,7 +336,7 @@
     }
 
     .label-input {
-        font-family: Urbanist;
+        font-family: "Istok Web", sans-serif ;
         font-size: 12px;
         font-style: normal;
         font-weight: 700;
@@ -331,7 +350,7 @@
 <style>
 
     .form-contact .select {
-        height: 35px;  
+        height: 35px;
     }
 
     .form-contact .select-title,
@@ -541,7 +560,7 @@
     }
 
     .label-input {
-        font-family: Urbanist;
+        font-family: "Istok Web", sans-serif ;
         font-size: 12px;
         font-style: normal;
         font-weight: 700;
@@ -579,13 +598,14 @@
 
         formdata.append("name", form.elements['name'].value);
         formdata.append("email", form.elements['email'].value);
-        
         if (form.elements['type']) {
             formdata.append("type", form.elements['type'].value);
         }
-
+        if (form.elements['department']) {
+            formdata.append("department", form.elements['department'].value ?? '');
+        }
         formdata.append("message", form.elements['message'].value);
-        
+
         if (form.elements['file']) {
             formdata.append("file", form.elements['file'].files[0] ?? '');
         }

@@ -34,11 +34,11 @@ class CatalogController extends Controller
         [$products, $count] = $catalogService->getProducts();
 
         $clearRoute = $catalogService->getClearRoute();
-
+        $activeCategory = $catalogService->getActiveCategory();
         if ($r->isMethod('post')) {
             $items_component = new CardItems($products);
             $pagination_component = new Pagination($count, $pagesize, $page, $paglink, true);
-            $filters_component = new Filters($tastes, $weights, $clearRoute, $activeTastes, $activeWeights);
+            $filters_component = new Filters($tastes, $weights, $clearRoute, $activeTastes, $activeWeights, $activeCategory);
 
             return $this->response([
                 'html' => $items_component->render(),
@@ -58,6 +58,7 @@ class CatalogController extends Controller
             'count'             => $count,
             'products'          => $products,
             'categories'        => $categories,
+            'activeCategory'    => $activeCategory,
             'clearRoute'        => $clearRoute,
             'tastes'            => $tastes,
             'weights'           => $weights,

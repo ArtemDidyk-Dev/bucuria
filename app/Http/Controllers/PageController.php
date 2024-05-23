@@ -58,7 +58,7 @@ class PageController extends Controller
 		$data['date'] = date('Y-m-d H:i:s');
 
 		$file = $data['file'] ?? '';
-		
+
 		if(!empty($file)) {
 			$upload_path = "files/2/career/";
 			if ($file != null) {

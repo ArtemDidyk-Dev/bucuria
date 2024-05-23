@@ -151,7 +151,7 @@
 
     .year-link {
         text-align: center;
-        font-family: Urbanist;
+        font-family: "Istok Web", sans-serif ;
         font-size: 18px;
         font-style: normal;
         font-weight: 500;
@@ -317,7 +317,7 @@
 
     .year-menu-section {
         position: sticky;
-        top: 94px;
+        top: 110px;
         left: 0;
         width: 100%;
         height: 46px;
@@ -342,7 +342,7 @@
 
     .year-link {
         text-align: center;
-        font-family: Urbanist;
+        font-family: "Istok Web", sans-serif ;
         font-size: 16px;
         font-style: normal;
         font-weight: 500;

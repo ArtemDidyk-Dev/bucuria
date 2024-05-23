@@ -27,7 +27,7 @@
         text-align: center;
         margin-top: 10px;
         margin-bottom: 10px;
-        font-family: Urbanist;
+        font-family: "Istok Web", sans-serif ;
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
@@ -65,7 +65,7 @@
     .product-catalog-item-title {
         width: 65px;
         text-align: center;
-        font-family: Urbanist;
+        font-family: "Istok Web", sans-serif ;
         font-size: 13px;
         font-style: normal;
         font-weight: 400;

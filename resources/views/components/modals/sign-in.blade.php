@@ -61,7 +61,7 @@
     .modal-description {
         width: 360px;
         text-align: center;
-        font-family: Montserrat;
+        font-family: "Istok Web", sans-serif ;
         font-size: 13px;
         font-style: normal;
         font-weight: 500;
@@ -83,7 +83,7 @@
         margin-top: 10px;
         text-align: right;
         float: right;
-        font-family: Montserrat;
+        font-family: "Istok Web", sans-serif ;
         font-size: 13px;
         font-style: normal;
         font-weight: 500;
@@ -248,7 +248,7 @@
     .btn-link-right {
         margin-top: 6px;
         text-align: right;
-        font-family: Montserrat;
+        font-family: "Istok Web", sans-serif ;
         font-size: 12px;
         font-style: normal;
         font-weight: 500;
