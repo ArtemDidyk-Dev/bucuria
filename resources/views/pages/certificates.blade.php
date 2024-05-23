@@ -48,22 +48,26 @@
             $cards_items[] = [$elm->field('Заголовок', 'text', ''), $elm->field('Текст', 'textarea', ''), $elm->field('Файл', 'file', ''), $elm->field('Фото', 'photo', ''), $elm->field('Текст кнопки', 'text', '')];
         }
     @endphp
-
-    @foreach ($cards_items as $item)
+    <div class="certificate-big-container">
         <div class="certificate-big-card">
-            <div class="container certificate-big-card-inner">
-                <img src="{{ $item[3] }}" alt="" class="certificate-img">
-                <div class="certificate-content">
-                    <div class="certificate-title h5 color-red">{{ $item[0] }}</div>
-                    <div class="extra-text color-red certificate-desc">{{ $item[1] }}</div>
-                    <a href="{{ $item[2] }}" download class="color-white button-small button-a">
-                        {{ $item[4] }}
-                        <img src="/images/icons/pdf.svg" alt="" class="button-icon">
-                    </a>
+            @foreach ($cards_items as $item)
+                <div class="certificate-big-card">
+                    <div class="certificate-big-card-inner">
+                        <img src="{{ $item[3] }}" alt="" class="certificate-img">
+                        <div class="certificate-content">
+                            <div class="certificate-title h5 color-red">{{ $item[0] }}</div>
+                            <div class="extra-text color-red certificate-desc">{{ $item[1] }}</div>
+                            <a href="{{ $item[2] }}" download class="color-white button-small button-a">
+                                {{ $item[4] }}
+                                <img src="/images/icons/pdf.svg" alt="" class="button-icon">
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            @endforeach
         </div>
-    @endforeach
+    </div>
+
 
     <div class="certificate-big-cards">
         <div class="container">
@@ -89,7 +93,8 @@
 @desktopcss
 <style>
     .certificate-big-card {
-        display: inline-flex;
+        display: flex;
+        flex-direction: column;
         padding: 0 80px;
         align-items: flex-start;
         background: var(--color-skin);
@@ -242,6 +247,10 @@
         width: 1440px;
         height: 700px;
         object-fit: cover;
+    }
+    .certificate-big-container {
+        padding-left: var(--offset);
+        padding-right: var(--offset);
     }
 </style>
 @mobilecss
@@ -416,6 +425,9 @@
     .main>.container {
         padding-left: 15px;
         padding-right: 15px;
+    }
+    .certificate-big-container {
+        padding: 0px !important;
     }
 </style>
 @endcss

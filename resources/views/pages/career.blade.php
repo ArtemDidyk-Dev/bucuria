@@ -107,19 +107,21 @@
                             @endforeach
                         </div>
                     </div>
+                    @php
+                        $managers = $s->field('Топ-менеджеры', 'Менеджер', 'repeat', true);
+                        $managers_items = [];
+                        foreach ($managers as $elm) {
+                            $managers_items[] = [$elm->field('Имя', 'text', 'Michal Richi'), $elm->field('Описание', 'text', 'Top manager'), $elm->field('Телефон', 'text', '+373 (22) 895322'), $elm->field('Email', 'text', 'reclama@bucuria.md'), $elm->field('Фото', 'photo', '')];
+                        }
+                    @endphp
 
                     <div class="container">
+                        @if($managers_items)
                         <div class="teams-block">
                             <div class="teams-title h4 color-black">
                                 {{ $s->field('Топ-менеджеры', 'Заголовок', 'text', true, 'Top managers in Bucuria') }}
                             </div>
-                            @php
-                                $managers = $s->field('Топ-менеджеры', 'Менеджер', 'repeat', true);
-                                $managers_items = [];
-                                foreach ($managers as $elm) {
-                                    $managers_items[] = [$elm->field('Имя', 'text', 'Michal Richi'), $elm->field('Описание', 'text', 'Top manager'), $elm->field('Телефон', 'text', '+373 (22) 895322'), $elm->field('Email', 'text', 'reclama@bucuria.md'), $elm->field('Фото', 'photo', '')];
-                                }
-                            @endphp
+
                             <div class="teams">
                                 @foreach ($managers_items as $item)
                                     <x-cards.people-card name="{{ $item[0] }}" description="{{ $item[1] }}"
@@ -128,6 +130,7 @@
                                 @endforeach
                             </div>
                         </div>
+                        @endif
 
                         <div class="container">
                             <div class="contact-form-block">

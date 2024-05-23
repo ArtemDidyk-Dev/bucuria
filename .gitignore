@@ -22,3 +22,5 @@ public/js/cache
 public/photos
 public/images/
 public/files/
+tmp
+opt

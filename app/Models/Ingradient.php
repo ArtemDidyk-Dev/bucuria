@@ -14,9 +14,7 @@ class Ingradient extends MultilanguageModel
     public function getBySlug($slug)
     {
 
-        $ingradient = $this->where('slug', $slug)
+        return $this->where('slug', $slug)
             ->first();
-
-        return $ingradient;
     }
 }
