@@ -18,7 +18,6 @@
                 <div class="baner-image">
                     <img src="{{ $s->field('Баннер', 'Изображение', 'photo', false, '/images/about.png') }}"
                         alt="" class="banner-img">
-                    <div class="gradient-banner"></div>
                 </div>
                 <div class="banner-content">
                     <div class="banner-title h1 color-white">

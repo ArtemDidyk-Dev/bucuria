@@ -5,9 +5,6 @@
             <div class="ingradient-title h4 color-white">
                 {{ $ingradient->title }}
             </div>
-            <div class="ingradient-description extra-text color-white">
-                {{ $ingradient->short_description }}
-            </div>
         </div>
     </div>
 </a>

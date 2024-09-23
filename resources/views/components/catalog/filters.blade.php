@@ -49,7 +49,6 @@
                             onchange="makeFilters()"
                             id="taste-{{ $taste->slug }}"
                         >
-                        <img src="{{ $taste->image }}" alt="{{ $taste->title }}" class="checkbox-image hover-active">
                         <span class="checkmark"></span>
                         <span class="checkbox-description extra-text color-black">{{ $taste->title }} <span class="checkbox-count color-grey">{{ $taste->products_count }}</span></span>
                     </label>

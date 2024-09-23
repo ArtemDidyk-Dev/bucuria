@@ -84,9 +84,7 @@
                 description="{!! $s->field('Блок 4', 'Описание', 'ckeditor', true, '') !!}" />
         </div>
 
-        <div class="container">
-            <x-cards.video :video="$s->field('Відео', 'Відео', 'file', false, '/files/video2.mp4')" />
-        </div>
+
     </div>
 
     <x-slot name="meta_title">

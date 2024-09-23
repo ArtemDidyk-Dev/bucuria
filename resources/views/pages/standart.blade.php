@@ -1,5 +1,4 @@
 <x-layout>
-
     <section class="standart">
 
         <div class="breadcrumbs-block">
@@ -18,6 +17,11 @@
                     <div class="content">
                         <h1 class="h2 color-text color-black">{{ $page->title }}</h1>
                         {!! $page->content !!}
+                        @if($page->file)
+                            <x-inputs.download href="{{$page->file}}">
+                                {{$page->button_text}}
+                            </x-inputs.download>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -41,6 +45,9 @@
 
 @desktopcss
 <style>
+    .download {
+        margin-left: -14px;
+    }
     .standart {
         padding-left: 80px;
         padding-right: 80px;

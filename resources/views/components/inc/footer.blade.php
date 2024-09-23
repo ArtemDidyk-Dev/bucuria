@@ -274,18 +274,28 @@
     }
 
     function prev_card(id) {
-        var el = document.getElementById(id).querySelector('.menu-item');
-        var elMargin = parseInt(window.getComputedStyle(el, null).marginRight);
-        var elWidth = parseInt(el.offsetWidth);
-        document.getElementById(id).scrollLeft -= elWidth + elMargin;
+        var container = document.getElementById(id);
+        if (container.scrollLeft > 0) {
+            var el = container.querySelector('.menu-item');
+            var elMargin = parseInt(window.getComputedStyle(el).marginRight);
+            var elWidth = el.offsetWidth;
+            container.scrollLeft -= elWidth + elMargin;
+        }
     }
 
     function next_card(id) {
+        var container = document.getElementById(id);
+        var el = container.querySelector('.menu-item');
+        var elMarginRight = parseInt(window.getComputedStyle(el).marginRight);
+        var elWidth = el.offsetWidth;
+        var maxScrollLeft = container.scrollWidth - container.clientWidth;
+        var remainingScroll = maxScrollLeft - container.scrollLeft;
 
-        var el = document.getElementById(id).querySelector('.menu-item');
-        var elMarginRight = parseInt(window.getComputedStyle(el, null).marginRight);
-        var elWidth = parseInt(el.offsetWidth);
-        document.getElementById(id).scrollLeft += elWidth + elMarginRight;
+        if (remainingScroll >= elWidth + elMarginRight) {
+            container.scrollLeft += elWidth + elMarginRight;
+        } else {
+            container.scrollLeft = maxScrollLeft;
+        }
     }
 
 
@@ -783,6 +793,13 @@
     function search_mobile() {
         document.querySelector('.search-form').classList.toggle('active')
     }
+    document.addEventListener('DOMContentLoaded', function () {
+        const banner = document.querySelector('.banner');
+        console.log(banner)
+        setTimeout(() => {
+            banner.classList.add('show');
+        }, 100);  // Невелика затримка перед активацією
+    });
 </script>
 
 @endjs

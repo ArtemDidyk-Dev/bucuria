@@ -20,27 +20,19 @@
 
 @desktopcss
 <style>
-
-    .big-card {
-        width: auto;
-        height: 550px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
     .big-card-img {
         display: block;
         position: absolute;
         z-index: 0;
         width: 1440px;
-        height: 550px;
-        object-fit: contain;
+        height: auto;
+        object-fit: cover;
     }
 
     .card-content {
         position: relative;
         z-index: 1;
+        padding: 125px 0;
     }
 
     .card-title {
@@ -48,7 +40,7 @@
         justify-content: center;
         align-items: center;
         text-align: center;
-        width: 570px;
+        width: 100%;
         text-transform: uppercase;
         margin: 0 auto;
     }
@@ -66,7 +58,7 @@
 <style>
     .big-card {
         width: auto;
-        height: 417px;
+        height: 100%
     }
 
     .big-card .container {
@@ -79,7 +71,7 @@
         z-index: 0;
         left: 0;
         width: 100%;
-        height: 421px;
+        height: 100%;
         object-fit: cover;
     }
 

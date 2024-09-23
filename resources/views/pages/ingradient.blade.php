@@ -50,9 +50,7 @@
                 )" />
         </div>
 
-        <div class="container">
-            <x-cards.video :video="$s->field('Cтраница инградиента', 'Видео', 'file', false, '/files/video1.mp4')" />
-        </div>
+
 
         <div class="container">
             <x-cards.big-image-card image='{{ $ingradient->img_block }}'

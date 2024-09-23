@@ -42,25 +42,25 @@
         </div>
 
         <div class="container">
-            <x-cards.big-image-card 
-                :title="$s->field('Баннер 2','Заголовок','textarea',true,'The largest enterprise for the production of confectionery in Moldova')" 
+            <x-cards.big-image-card
+                :title="$s->field('Баннер 2','Заголовок','textarea',true,'The largest enterprise for the production of confectionery in Moldova')"
                 :image="$s->field('Баннер 2', 'Картинка', 'photo', false, '/images/card-image1.png')"
-                :imagemob="$s->field('Баннер 2', 'Картинка моб', 'photo', false, '/images/card-image1-mob.png')" 
-                center 
+                :imagemob="$s->field('Баннер 2', 'Картинка моб', 'photo', false, '/images/card-image1-mob.png')"
+                center
                 :btn-text="$s->field('Баннер 2','Кнопка текст','text',true,'Read more')"
-                :link="$s->field('Баннер 2','Кнопка ссылка','text',false,'/catalog')" 
-                gradient 
+                :link="$s->field('Баннер 2','Кнопка ссылка','text',false,'/catalog')"
+                gradient
             />
         </div>
 
         <div class="container">
-            <x-cards.big-image-card 
-                :title="$s->field('Баннер 3', 'Заголовок', 'textarea', true, 'We only use the best ingredients')" 
-                :image="$s->field('Баннер 3', 'Картинка', 'photo', true, '/images/card-coffe.png')" 
-                :imagemob="$s->field('Баннер 3', 'Картинка моб', 'photo', true, '/images/card-coffe-mob.png')" 
+            <x-cards.big-image-card
+                :title="$s->field('Баннер 3', 'Заголовок', 'textarea', true, 'We only use the best ingredients')"
+                :image="$s->field('Баннер 3', 'Картинка', 'photo', true, '/images/card-coffe.png')"
+                :imagemob="$s->field('Баннер 3', 'Картинка моб', 'photo', true, '/images/card-coffe-mob.png')"
                 :btn-text="$s->field('Баннер 3','Кнопка текст','text',true,'Read more')"
-                :link="$s->field('Баннер 3','Кнопка ссылка','text',false,'/ingradients')"  
-                red 
+                :link="$s->field('Баннер 3','Кнопка ссылка','text',false,'/ingradients')"
+                red
             />
         </div>
 
@@ -69,14 +69,14 @@
         </div>
 
         <div class="container">
-            <x-cards.big-image-card 
-                :title="$s->field('Баннер 4', 'Заголовок', 'textarea', true, 'We have over 300 products in our range!')" :description="$s->field('Баннер 4','Описание','textarea',true,'You will 100% find something for yourself from the abundance of sweets')" 
-                :image="$s->field('Баннер 4', 'Картинка', 'photo', false, '/images/image-card3.png')" 
-                :imagemob="$s->field('Баннер 4', 'Картинка моб', 'photo', false, '/images/image-card3-mob.png')" 
+            <x-cards.big-image-card
+                :title="$s->field('Баннер 4', 'Заголовок', 'textarea', true, 'We have over 300 products in our range!')" :description="$s->field('Баннер 4','Описание','textarea',true,'You will 100% find something for yourself from the abundance of sweets')"
+                :image="$s->field('Баннер 4', 'Картинка', 'photo', false, '/images/image-card3.png')"
+                :imagemob="$s->field('Баннер 4', 'Картинка моб', 'photo', false, '/images/image-card3-mob.png')"
                 center
                 :btn-text="$s->field('Баннер 4','Кнопка текст','text',true,'Read more')"
-                :link="$s->field('Баннер 4','Кнопка ссылка','text',false,'/catalog')"  
-                gradient 
+                :link="$s->field('Баннер 4','Кнопка ссылка','text',false,'/catalog')"
+                gradient
             />
         </div>
 
@@ -186,6 +186,43 @@
         width: 1200px;
     }
 
+    .banner-content {
+        opacity: 0;
+        transform: translateY(20px);  /* Зсуваємо текст вниз */
+        transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        transition-delay: 0.5s;  /* Затримка перед появою */
+        z-index: 999;
+    }
+
+    /* Коли з'являється активний банер */
+    .banner.show .banner-content {
+        opacity: 1;
+        transform: translateY(0);  /* Повертаємо текст на початкову позицію */
+    }
+
+    /* Можна додати окремо для кожного елемента */
+    .banner-title {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1s ease, transform 1s ease;
+        transition-delay: 0.3s;  /* Затримка появи заголовка */
+    }
+
+    .banner-desc {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1.2s ease, transform 1.2s ease;
+        transition-delay: 0.6s;  /* Затримка появи опису */
+    }
+
+    /* Коли банер з'являється */
+    .banner.show .banner-title,
+    .banner.show .banner-desc {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+
 </style>
 @mobilecss
 <style>
@@ -250,5 +287,4 @@
 @endcss
 
 @startjs
-<script></script>
 @endjs

@@ -586,8 +586,12 @@
         right: 30px;
         z-index: 1;
         cursor: pointer;
-        width: 30px;
-        height: 30px;
+        width: 45px;
+        height: 45px;
+        img {
+            object-fit: cover;
+            width: 100%;
+        }
     }
 
     .card-arrow-left {
@@ -597,8 +601,12 @@
         left: 30px;
         z-index: 1;
         cursor: pointer;
-        width: 30px;
-        height: 30px;
+        width: 45px;
+        height: 45px;
+        img {
+            object-fit: cover;
+            width: 100%;
+        }
     }
 
     .header-menu {
@@ -639,12 +647,11 @@
     }
 
     .menu-item {
-        min-width: 110px;
         height: 110px;
-        margin-right: 20px;
         margin-top: 10px;
         margin-bottom: 10px;
         transition: .3s;
+        min-width: calc(100% / 10);
     }
 
     .menu-item:hover {
@@ -660,9 +667,6 @@
         color: var(--color-red);
     }
 
-    .menu-item:last-child {
-        margin-right: 40px;
-    }
 
     .menu-item-img {
         width: 110px;
