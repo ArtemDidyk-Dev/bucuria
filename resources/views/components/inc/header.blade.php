@@ -242,7 +242,7 @@
                         </div>
                     </div>
 
-                    <div class="products-menu " id="products-menu">
+                    <div class="products-menu" id="products-menu">
                         @foreach ($categories as $category)
                             <a href="{{ route('catalog', [$category->slug], false) }}" class="menu-item">
                                 <img src="{{ $category->image }}" class="menu-item-img">
@@ -698,6 +698,14 @@
 
     .product-menu-block:hover .menu {
         color: var(--color-red) !important;
+    }
+
+    #products-menu {
+        scroll-behavior: smooth;
+        cursor: grab;
+    }
+    #products-menu:hover {
+        cursor: grabbing;
     }
 </style>
 @mobilecss

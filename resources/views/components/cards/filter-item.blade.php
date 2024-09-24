@@ -81,7 +81,7 @@
     }
 
     .filter-product-item:hover .filter-product-img{
-        transform: translateZ(-1px) scale(1.2);
+        object-position: right;
     }
     .filter-product-item:hover .filter-product-img-box {
         border: 3px solid #C81317;

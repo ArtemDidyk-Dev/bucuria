@@ -20,7 +20,7 @@
     .content-product {
         display: flex;
         flex-wrap: wrap;
-        
+
     }
 </style>
 @endcss

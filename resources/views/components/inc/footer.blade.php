@@ -795,11 +795,61 @@
     }
     document.addEventListener('DOMContentLoaded', function () {
         const banner = document.querySelector('.banner');
-        console.log(banner)
-        setTimeout(() => {
-            banner.classList.add('show');
-        }, 100);  // Невелика затримка перед активацією
+        if(banner) {
+            setTimeout(() => {
+                banner.classList.add('show');
+            }, 100);  // Невелика затримка перед активацією
+        }
     });
+
+
+
+    const slider = document.getElementById('products-menu');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    // Початок перетягування
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('active');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+        document.body.style.userSelect = 'none'; // Запобігає виділенню тексту
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.classList.remove('active');
+        document.body.style.userSelect = ''; // Повертає стандартну поведінку
+    });
+
+    // Переміщення під час перетягування
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return; // Якщо не натиснуто кнопку миші, виходимо
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2; // Швидкість прокрутки
+        slider.scrollLeft = scrollLeft - walk;
+    })
+
+    const images = document.querySelectorAll('#products-menu .menu-item-img');
+    if (images) {
+        images.forEach((img) => {
+            img.addEventListener('dragstart', (e) => {
+                e.preventDefault(); // Запобігає стандартній поведінці перетягування
+            });
+        });
+    }
+
+
+
+
 </script>
 
 @endjs

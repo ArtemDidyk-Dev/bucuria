@@ -224,11 +224,11 @@
             <x-cards.big-image-card
                 title="{{ $s->field('Блок 2','Заголовок','text',true,'We have over 300 products in our range!') }} "
                 description="{{ $s->field('Блок 2', 'Описание', 'text', true, 'You will 100% find something for yourself from the abundance of sweets') }}"
-                :image="$s->field('Блок 2', 'Фото', 'photo', false, '/images/image-card3.png')" link="{{ $s->field('Блок 2', 'Ссылка', 'text', true, '/catalog') }} " 
-                center 
+                :image="$s->field('Блок 2', 'Фото', 'photo', false, '/images/image-card3.png')" link="{{ $s->field('Блок 2', 'Ссылка', 'text', true, '/catalog') }} "
+                center
                 :btn-text="$s->field('Блок 2','Кнопка текст','text',true,'Read more')"
                 :link="$s->field('Блок 2','Кнопка ссылка','text',false,'/catalog')"
-                gradient 
+                gradient
             />
         </div>
 
@@ -239,12 +239,12 @@
         <div class="container main">
             <x-cards.big-image-card
                 title="{{ $s->field('Блок 3','Заголовок','text',true,'Learn more about our company') }}"
-                link="{{ $s->field('Блок 3', 'Ссылка', 'text', true, '/aboutus') }} " 
-                :image="$s->field('Блок 3', 'Фото', 'photo', false, '/images/card-image1.png')" 
-                center 
+                link="{{ $s->field('Блок 3', 'Ссылка', 'text', true, '/aboutus') }} "
+                :image="$s->field('Блок 3', 'Фото', 'photo', false, '/images/card-image1.png')"
+                center
                 :btn-text="$s->field('Блок 3','Кнопка текст','text',true,'Read more')"
                 :link="$s->field('Блок 3','Кнопка ссылка','text',false,'/aboutus')"
-                gradient 
+                gradient
             />
         </div>
     </div>

@@ -6,9 +6,6 @@
                     <div class="h4 history-year"> {{ $year }}</div>
                     <div class="h3">{!! Field::enter_to_br($title) !!}</div>
                 </div>
-
-                <img src="{{ $image }}" alt="" class="history-card-img">
-
                 @if ($description)
                     <div class="history-card-desc main-text color-white">
                         <div class="box history-box">
@@ -16,6 +13,8 @@
                         </div>
                     </div>
                 @endif
+
+                <img src="{{ $image }}" alt="" class="history-card-img">
             </div>
         </div>
     </div>
@@ -27,14 +26,12 @@
                     <div class="h4 history-year-red">{{ $year }}</div>
                     <div class="h3">{!! Field::enter_to_br($title) !!}</div>
                 </div>
-
-                <img src="{{ $image }}" alt="" class="history-card-img">
-
                 @if ($description)
                     <div class="history-card-desc main-text color-red">
                         {{ $description }}
                     </div>
                 @endif
+                <img src="{{ $image }}" alt="" class="history-card-img">
             </div>
         </div>
     </div>
@@ -45,7 +42,7 @@
     .history-card-desc {
         overflow-x: hidden;
         overflow-y: auto;
-        height: 450px;
+        height: 100%;
         padding-right: 10px;
     }
     .history-card-desc::-webkit-scrollbar {
@@ -58,48 +55,45 @@
     }
     .history-card-red {
         width: auto;
-        height: 583px;
+        height: 100%;
         background: var(--color-red);
     }
 
     .history-card {
         width: auto;
-        height: 583px;
+        height: 100%;
         background: var(--color-skin);
     }
 
     .history-card-img {
         display: block;
-        width: 450px;
-        height: 400px;
         object-fit: cover;
-        margin-left: 75px;
-        margin-right: 75px;
     }
 
     .history-card-content {
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        padding: 91px 80px 91px 80px
+        flex-direction: column;
+        padding: 15px;
     }
 
     .history-card-title {
         display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        width: 340px;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
         gap: 18px;
     }
 
     .history-year {
-        padding-bottom: 12px;
+        padding-bottom: 0px;
         border-bottom: 1px solid var(--color-white);
         margin-bottom: 18px;
     }
 
     .history-year-red {
-        padding-bottom: 12px;
+        padding-bottom: 0px;
         border-bottom: 1px solid var(--color-red);
         margin-bottom: 18px;
     }
@@ -107,14 +101,15 @@
     .history-card-desc {
         display: flex;
         justify-content: flex-start;
-        width: 340px;
+        width: 100%;
+        margin-bottom: 10px;
     }
 </style>
 @mobilecss
 <style>
     .history-card-red {
         display: flex;
-        padding: 60px 0;
+        padding: 15px 0;
         flex-direction: column;
         align-items: flex-start;
         gap: 20px;
@@ -134,8 +129,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 290px;
-        height: 250px;
         object-fit: cover;
     }
 
@@ -145,19 +138,19 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        gap: 20px;
+        gap: 10px;
     }
 
     .history-card-title {
         display: flex;
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
         width: 100%;
+        justify-content: center;
         gap: 18px;
     }
 
     .history-year {
-        padding-bottom: 12px;
+        padding-bottom: 0px;
         border-bottom: 1px solid var(--color-white);
         margin-bottom: 18px;
     }

@@ -62,7 +62,11 @@ Route::group([
 
 	Route::post('/api/user-edit', [AccountController::class, 'edit'])->name('api-user-edit');
 
-	Route::get('/{slug}', [PageController::class, 'standart'])->name('standart');
+    Route::get('/development', function () {
+        return response()->view("errors.development");
+    })->name('development');
+
+    Route::get('/{slug}', [PageController::class, 'standart'])->name('standart');
 
 	Route::fallback(function () {
 		return response()->view("errors.404")->setStatusCode(404);
