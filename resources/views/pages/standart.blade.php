@@ -1,4 +1,11 @@
 <x-layout>
+    @if($access)
+        <div class="standart">
+            <div class="container">
+                <x-inc.access :page="$page"/>
+            </div>
+        </div>
+    @else
     <section class="standart">
 
         <div class="breadcrumbs-block">
@@ -11,7 +18,6 @@
         </div>
 
         <div class="container">
-
             <div class="standart-inner">
                 <div class="standart-content">
                     <div class="content">
@@ -40,7 +46,7 @@
     <x-slot name="meta_keywords">
         {{ $page->meta_keywords }}
     </x-slot>
-
+    @endif
 </x-layout>
 
 @desktopcss
@@ -130,9 +136,22 @@
     .content figure {
         margin: 0;
     }
+    .access  {
+        width: 361px;
+        margin: 0 auto;
+        padding: 60px 0;
+    }
 </style>
 @mobilecss
 <style>
+    .access  {
+        width: 100%;
+        padding: 114px 0 30px 0;
+    }
+    .access form button {
+        width: 100%;
+        margin-top: 0px;
+    }
     .standart {
         padding-left: 15px;
         padding-right: 15px;

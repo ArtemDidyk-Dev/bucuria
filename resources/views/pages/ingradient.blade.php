@@ -17,41 +17,9 @@
                 ]" />
             </div>
         </div>
-        <div class="banner">
-            <div class="baner-image">
-                <img src="{{ $ingradient->banner_img }}" alt="" class="banner-img">
-                <div class="gradient-banner"></div>
-            </div>
-            <div class="banner-content">
-                <div class="banner-title h1 color-white">
-                    {!! Field::enter_to_br($ingradient->banner_title) !!}
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="main">
-        <div class="container">
-            <x-cards.big-card
-                title="{{ $s->field('Cтраница инградиента', 'Красный блок Заголовок', 'textarea', true, 'The best flavor combinations for you') }}"
-                description="{{ $s->field('Cтраница инградиента', 'Красный блок Описание', 'textarea', true, 'Our Master Chocolatiers continuously create beautiful flavour combinations; perfectly pairing ingredients to bring out our chocolate’s unique flavour. Every single ingredient is meticulously researched and sourced from the finest producers around the world') }}"
-                :image="$s->field(
-                    'Cтраница инградиента',
-                    'Красный блок Картинка',
-                    'photo',
-                    false,
-                    '/images/mask.png',
-                )" :imagemob="$s->field(
-                    'Cтраница инградиента',
-                    'Красный блок Картинка моб',
-                    'photo',
-                    false,
-                    '/images/mobile-big-card.png',
-                )" />
-        </div>
-
-
-
         <div class="container">
             <x-cards.big-image-card image='{{ $ingradient->img_block }}'
                 descriptionBlockTitle='{{ $ingradient->title_block }}'

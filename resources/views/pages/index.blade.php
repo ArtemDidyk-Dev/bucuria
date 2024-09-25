@@ -1,10 +1,6 @@
 <x-layout>
-
     <?php $s = new Single('Главная', 10, 1); ?>
-
     <div class="main">
-
-
         <div class="container lr">
             <div class="banner">
                 <div class="baner-image">
@@ -113,6 +109,16 @@
         {{ $s->field('Meta', 'Meta Keywords', 'textarea', true, 'Bucuria') }}
     </x-slot>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const banner = document.querySelector('.banner');
+            if(banner) {
+                setTimeout(() => {
+                    banner.classList.add('show');
+                }, 450);  // Невелика затримка перед активацією
+            }
+        });
+    </script>
 
 </x-layout>
 @desktopcss
@@ -194,13 +200,13 @@
         z-index: 999;
     }
 
-    /* Коли з'являється активний банер */
+
     .banner.show .banner-content {
         opacity: 1;
-        transform: translateY(0);  /* Повертаємо текст на початкову позицію */
+        transform: translateY(0);
     }
 
-    /* Можна додати окремо для кожного елемента */
+
     .banner-title {
         opacity: 0;
         transform: translateY(30px);
@@ -215,7 +221,7 @@
         transition-delay: 0.6s;  /* Затримка появи опису */
     }
 
-    /* Коли банер з'являється */
+
     .banner.show .banner-title,
     .banner.show .banner-desc {
         opacity: 1;
@@ -283,6 +289,45 @@
         padding-left: 0;
         padding-right: 0;
     }
+
+    .banner-content {
+        /* Спочатку приховуємо весь контент */
+        opacity: 0;
+        transform: translateY(20px);  /* Зсуваємо текст вниз */
+        transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        transition-delay: 0.5s;  /* Затримка перед появою */
+    }
+
+
+    .banner.show .banner-content {
+        opacity: 1;
+        transform: translateY(0);
+        position: relative;
+        z-index: 2;
+    }
+
+
+    .banner-title {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1s ease, transform 1s ease;
+        transition-delay: 0.3s;  /* Затримка появи заголовка */
+    }
+
+    .banner-desc {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1.2s ease, transform 1.2s ease;
+        transition-delay: 0.6s;  /* Затримка появи опису */
+    }
+
+
+    .banner.show .banner-title,
+    .banner.show .banner-desc {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
 </style>
 @endcss
 

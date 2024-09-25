@@ -5,29 +5,37 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CareerRequest;
 use App\Models\Career;
 use App\Models\Standart;
+use App\Services\PageAccessInterface;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-	public function index()
+    public function __construct(
+        public PageAccessInterface $pageAccess,
+    )
+    {
+    }
+
+    public function index()
 	{
 		return view('pages.index', []);
 	}
 
-	public function standart($slug = '')
+	public function standart(Request $request, $slug = '')
 	{
-
 		$pageModel = new Standart();
 
 		$page = $pageModel->getBySlug($slug);
 
+        $access = $this->pageAccess->isAccess($page, $request);
 		if (empty($page)) {
 			abort(404);
 		}
 
 		return view('pages.standart', [
 
-			'page' => $page
+			'page' => $page,
+            'access' => $access,
 		]);
 	}
 
@@ -90,4 +98,10 @@ class PageController extends Controller
 	{
 		return view('pages.suppliers', []);
 	}
+
+    public function  access(Standart $standart, Request $request)
+    {
+        $this->pageAccess->access($standart, $request);
+        return redirect()->back();
+    }
 }

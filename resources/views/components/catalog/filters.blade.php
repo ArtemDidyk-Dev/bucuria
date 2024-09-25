@@ -65,7 +65,7 @@
         <div class="panel">
             @foreach ($weights as $weight)
                 <div class="checkbox">
-                    <label class="containercheckbox body-2 color-white">
+                    <label class="body-2 color-white">
                         <input
                             type="checkbox"
                             name="filter-field"
@@ -76,7 +76,6 @@
                             onchange="makeFilters()"
                             id="weight-{{ $weight->slug }}"
                         >
-                        <span class="checkmark"></span>
                         <span class="checkbox-description extra-text color-black">{{ $weight->title }} <span class="checkbox-count color-grey">{{ $weight->products_count }}</span></span>
                     </label>
                 </div>

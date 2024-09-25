@@ -35,6 +35,14 @@
 
     <div class="big-image-card-section">
         <div class="container">
+            <x-cards.ingradient-big-card title=""
+                                         description="" />
+        </div>
+    </div>
+
+
+    <div class="big-image-card-section">
+        <div class="container">
             <x-cards.big-image-card
                 image="{{ $s->field('Блок 1', 'Картинка', 'photo', true, '/images/partners2.png') }}"
                 descriptionBlockTitle="{{ $s->field('Блок 1', 'Заголовок', 'textarea', true, 'HOW TO BECOME A NEW PARTNER OF THE COMPANY') }}"

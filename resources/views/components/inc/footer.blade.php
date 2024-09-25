@@ -26,8 +26,13 @@
             <div class="footer-column ">
                 <div class="footer-title color-black">{{ $fields['col2_title'] }}</div>
                 @foreach ($fields['col2'] as $item)
-                    <a href="{{ Lang::link($item[1]) }}"
-                        class="footer-list-item footer color-black">{{ $item[0] }}</a>
+                    <div class="footer-list-item">
+                        <a href="{{ Lang::link($item[1]) }}"
+                           class="footer color-black">{{ $item[0] }}</a>
+                        @if(isset($item['button_text']) && $item['button_text'] !== '')
+                            <a class="link-download" href="{{$item['file']}}" download="{{$item['file']}}">{{$item['button_text']}}</a>
+                        @endif
+                    </div>
                 @endforeach
             </div>
 
@@ -148,6 +153,10 @@
         height: 32px;
         margin-right: 15px;
     }
+    .link-download {
+        margin-left: 5px;
+        color: var(--color-red);
+    }
 </style>
 @mobilecss
 <style>
@@ -246,6 +255,10 @@
     .footer-icon-facebook:hover {
         transition: .3s;
         content: url('/images/icons/footer-facebook-red.svg')
+    }
+    .link-download {
+        margin-left: 0px;
+        color: var(--color-red);
     }
 </style>
 @endcss
@@ -793,14 +806,6 @@
     function search_mobile() {
         document.querySelector('.search-form').classList.toggle('active')
     }
-    document.addEventListener('DOMContentLoaded', function () {
-        const banner = document.querySelector('.banner');
-        if(banner) {
-            setTimeout(() => {
-                banner.classList.add('show');
-            }, 100);  // Невелика затримка перед активацією
-        }
-    });
 
 
 

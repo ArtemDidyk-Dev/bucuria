@@ -146,7 +146,6 @@
         display: flex;
         flex-direction: column;
         align-content: flex-start;
-        margin-top: 25px
     }
 
     .contact-block-data {
@@ -179,7 +178,7 @@
     }
 
     .google-maps-title {
-        width: 300px;
+        width: 111px;
         margin-left: 86px;
     }
 

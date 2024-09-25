@@ -1,3 +1,4 @@
+@if($image !== '')
 <div class="big-image-card {{ $center ? 'big-card-center' : 'big-card-top' }}">
 
     <img src="{{ $image }}" alt="" class="big-image-card-img desktop">
@@ -37,7 +38,7 @@
     </div>
 
 </div>
-
+@endif
 
 @desktopcss
 <style>

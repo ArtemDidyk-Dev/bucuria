@@ -32,7 +32,7 @@
     .card-content {
         position: relative;
         z-index: 1;
-        padding: 125px 0;
+        padding: 90px 0;
     }
 
     .card-title {

@@ -66,6 +66,8 @@ Route::group([
         return response()->view("errors.development");
     })->name('development');
 
+    Route::post('access/{standart}', [PageController::class, 'access'])->name('access.page');
+
     Route::get('/{slug}', [PageController::class, 'standart'])->name('standart');
 
 	Route::fallback(function () {

@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Inc;
 
+use App\Models\Standart;
 use Illuminate\View\Component;
 use Single;
 
@@ -29,10 +30,23 @@ class Footer extends Component
         $col2 = $s->field('Колонка 2', 'Колонка 2', 'repeat', true);
         $col2_items = [];
         foreach ($col2 as $elm) {
-            $col2_items[] = [
-                $elm->field('Текст', 'text', ''),
-                $elm->field('Ссылка', 'text', ''),
-            ];
+            $text = $elm->field('Текст', 'text', '');
+            $link = $elm->field('Ссылка', 'text', '');
+            if ($link === '/rekvizity-kompanii-bukuriya') {
+                $page = Standart::where('slug', 'rekvizity-kompanii-bukuriya')->first();
+                $col2_items[] = [
+                    $text,
+                    $link,
+                    'button_text' => $page->button_text ?? '',
+                    'file' => $page->file ?? '',
+                ];
+
+            } else {
+                $col2_items[] = [
+                    $text,
+                    $link,
+                ];
+            }
         }
         $this->fields['col2'] = $col2_items;
 
