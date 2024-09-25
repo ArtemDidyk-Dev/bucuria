@@ -159,12 +159,12 @@
     }
 
     .contact-li {
-
+        width: 162px;
         margin-right: 25px;
     }
 
     .contact-li:last-child {
-        margin-left: 0;
+        margin-right: 0;
     }
 
     .google-maps-block {
@@ -179,7 +179,7 @@
 
     .google-maps-title {
         width: 111px;
-        margin-left: 86px;
+        margin-left: 146px;
     }
 
     .contact-block-label {

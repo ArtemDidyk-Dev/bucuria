@@ -57,32 +57,6 @@
         </div>
     </div>
 
-    <div class="filter-item filter-item-checkbox active" onclick="toggleFilter(this)" data-id="weight">
-        <div class="accordion-btn">
-            <div class="accordion filter">The weight</div>
-            <img src="/images/icons/arrow-filter.svg" class="arrow-filter">
-        </div>
-        <div class="panel">
-            @foreach ($weights as $weight)
-                <div class="checkbox">
-                    <label class="body-2 color-white">
-                        <input
-                            type="checkbox"
-                            name="filter-field"
-                            @if($weight->active)
-                                checked
-                            @endif
-                            value="{{ $weight->slug }}"
-                            onchange="makeFilters()"
-                            id="weight-{{ $weight->slug }}"
-                        >
-                        <span class="checkbox-description extra-text color-black">{{ $weight->title }} <span class="checkbox-count color-grey">{{ $weight->products_count }}</span></span>
-                    </label>
-                </div>
-            @endforeach
-        </div>
-    </div>
-
     <div class="filter-item filter-item-checkbox" data-id="weight">
         <div class="accordion-btn accordion-filters-box active">
             <div class="accordion filter">The weight</div>
