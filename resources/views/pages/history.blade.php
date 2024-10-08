@@ -1,5 +1,4 @@
 <x-layout>
-
     <?php $s = new Single('История', 10, 1); ?>
 
     <div class="main">
@@ -78,7 +77,7 @@
         <div class="history-block" id="{{ $key }}">
             <div class="container">
                 <x-cards.history-card year="{{ $item[0] }}" title="{{ $item[1] }}"
-                    description="{{ $item[2] }}" image="{{ $item[3] }}" :count="$key" />
+                                      description="{{ $item[2] }}" image="{{ $item[3] }}" :count="$key" />
             </div>
         </div>
     @endforeach
@@ -332,6 +331,8 @@
         height: 46px;
         z-index: 1000;
     }
+
+
 </style>
 @mobilecss
 <style>

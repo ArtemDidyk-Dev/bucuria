@@ -2,19 +2,21 @@
     <div class="history-card-red">
         <div class="container">
             <div class="history-card-content">
-                <div class="history-card-title color-white">
-                    <div class="h4 history-year"> {{ $year }}</div>
-                    <div class="h3">{!! Field::enter_to_br($title) !!}</div>
-                </div>
-                @if ($description)
-                    <div class="history-card-desc main-text color-white">
-                        <div class="box history-box">
-                            {{ $description }}
-                        </div>
+                <div class="history-card-item">
+                    <div class="history-card-title color-white">
+                        <div class="h4 history-year"> {{ $year }}</div>
+                        <div class="h3">{!! Field::enter_to_br($title) !!}</div>
                     </div>
-                @endif
+                    @if ($description)
+                        <div class="history-card-desc main-text color-white">
+                            <div class="box history-box">
+                                {{ $description }}
+                            </div>
+                        </div>
+                    @endif
+                </div>
 
-                <img src="{{ $image }}" alt="" class="history-card-img">
+                <img src="{{ $image }}" alt="" class="history-card-img" >
             </div>
         </div>
     </div>
@@ -22,16 +24,19 @@
     <div class="history-card">
         <div class="container">
             <div class="history-card-content">
-                <div class="history-card-title color-red">
-                    <div class="h4 history-year-red">{{ $year }}</div>
-                    <div class="h3">{!! Field::enter_to_br($title) !!}</div>
-                </div>
-                @if ($description)
-                    <div class="history-card-desc main-text color-red">
-                        {{ $description }}
-                    </div>
-                @endif
                 <img src="{{ $image }}" alt="" class="history-card-img">
+                <div class="history-card-item left">
+                    <div class="history-card-title color-red">
+                        <div class="h4 history-year-red">{{ $year }}</div>
+                        <div class="h3">{!! Field::enter_to_br($title) !!}</div>
+                    </div>
+                    @if ($description)
+                        <div class="history-card-desc main-text color-red">
+                            {{ $description }}
+                        </div>
+                    @endif
+                </div>
+
             </div>
         </div>
     </div>
@@ -39,20 +44,32 @@
 
 @desktopcss
 <style>
+
+    .history-card-item {
+        padding-right: 20px;
+    }
+    .history-card-item.left {
+        padding-right: 0px;
+        padding-left: 20px;
+    }
+
     .history-card-desc {
         overflow-x: hidden;
         overflow-y: auto;
         height: 100%;
         padding-right: 10px;
     }
+
     .history-card-desc::-webkit-scrollbar {
         width: 2px;
         background: rgba(31, 31, 31, 0.08);
 
     }
+
     .history-card-desc::-webkit-scrollbar-thumb {
         background-color: #fff;
     }
+
     .history-card-red {
         width: auto;
         height: 100%;
@@ -68,34 +85,37 @@
     .history-card-img {
         display: block;
         object-fit: cover;
+        max-width: 600px;
+        height: 100%;
     }
 
     .history-card-content {
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
+        padding: 60px 80px;
         align-items: center;
-        flex-direction: column;
-        padding: 15px;
     }
 
     .history-card-title {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         width: 100%;
-        justify-content: center;
-        gap: 18px;
+        justify-content: flex-start;
+        gap: 5px;
     }
 
     .history-year {
         padding-bottom: 0px;
         border-bottom: 1px solid var(--color-white);
-        margin-bottom: 18px;
+        margin-bottom: 12px;
+        max-width: max-content;
     }
 
     .history-year-red {
         padding-bottom: 0px;
         border-bottom: 1px solid var(--color-red);
-        margin-bottom: 18px;
+        margin-bottom: 12px;
+        max-width: max-content;
     }
 
     .history-card-desc {
@@ -134,31 +154,33 @@
 
     .history-card-content {
         display: flex;
-        padding:0 15px;
+        padding: 0 15px;
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
         gap: 10px;
     }
 
-    .history-card-title {
+    history-card-title {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         width: 100%;
-        justify-content: center;
-        gap: 18px;
+        justify-content: flex-start;
+        gap: 5px;
     }
 
     .history-year {
         padding-bottom: 0px;
         border-bottom: 1px solid var(--color-white);
-        margin-bottom: 18px;
+        margin-bottom: 3px;
+        max-width: max-content;
     }
 
     .history-year-red {
-        padding-bottom: 12px;
+        padding-bottom: 0px;
         border-bottom: 1px solid var(--color-red);
-        margin-bottom: 18px;
+        margin-bottom: 3px;
+        max-width: max-content;
     }
 
     .history-card-desc {
