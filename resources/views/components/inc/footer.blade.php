@@ -29,9 +29,11 @@
                     <div class="footer-list-item">
                         <a href="{{ Lang::link($item[1]) }}"
                            class="footer color-black">{{ $item[0] }}</a>
-                        @if(isset($item['button_text']) && $item['button_text'] !== '')
-                            <a class="link-download" href="{{$item['file']}}" download="{{$item['file']}}">{{$item['button_text']}}</a>
-                        @endif
+                        </div>
+                @endforeach
+                @foreach ($fields['files'] as $fileItem)
+                    <div class="footer-list-item">
+                        <a class="link-download" href="{{$fileItem[0]}}" download="{{$fileItem[0]}}">{{$fileItem[1]}}</a>
                     </div>
                 @endforeach
             </div>
@@ -65,7 +67,7 @@
 <x-modals.registration-loyalty />
 <x-modals.loyalty-error />
 <x-modals.loyalty-success />
-
+<x-modals.cookie />
 <div id="loader">
     <svg width="40" height="40" viewBox="0 0 50 50">
         <path fill="#black"
@@ -154,7 +156,6 @@
         margin-right: 15px;
     }
     .link-download {
-        margin-left: 5px;
         color: var(--color-red);
     }
 </style>

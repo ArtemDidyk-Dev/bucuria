@@ -20,7 +20,7 @@
                 <div class="baner-image">
                     <img src="{{ $s->field('Баннер', 'Картинка', 'photo', false, '/images/history.png') }}" alt=""
                         class="banner-img">
-                    <div class="gradient-banner"></div>
+                    <div class="big-image-card-gradient"></div>
                 </div>
                 <div class="banner-content">
                     <div class="banner-title h1 color-white">

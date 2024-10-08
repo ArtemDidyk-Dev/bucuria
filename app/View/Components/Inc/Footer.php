@@ -32,21 +32,10 @@ class Footer extends Component
         foreach ($col2 as $elm) {
             $text = $elm->field('Текст', 'text', '');
             $link = $elm->field('Ссылка', 'text', '');
-            if ($link === '/rekvizity-kompanii-bukuriya') {
-                $page = Standart::where('slug', 'rekvizity-kompanii-bukuriya')->first();
-                $col2_items[] = [
-                    $text,
-                    $link,
-                    'button_text' => $page->button_text ?? '',
-                    'file' => $page->file ?? '',
-                ];
-
-            } else {
-                $col2_items[] = [
-                    $text,
-                    $link,
-                ];
-            }
+            $col2_items[] = [
+                $text,
+                $link,
+            ];
         }
         $this->fields['col2'] = $col2_items;
 
@@ -54,6 +43,17 @@ class Footer extends Component
         $this->fields['phone'] = $s->field('Колонка 3', 'Номер телефона', 'text', false, '+373 (22) 895600');
         $this->fields['email'] = $s->field('Колонка 3', 'E-mail', 'text', false, 'office@bucuria.md');
         $this->fields['address'] = $s->field('Колонка 3', 'Адрес', 'text', false, 'J.S.C."Bucuria" MD-2004, or. Chisinau, str. Columna, 162');
+
+        $file = $s->field('Колонка 2', 'Файли', 'repeat', true);
+        $file_items = [];
+        foreach ($file as $elm) {
+            $file_items[] = [
+                $elm->field('Файл', 'file', ''),
+                $elm->field('Текст', 'text', ''),
+            ];
+        }
+        $this->fields['files'] =  $file_items;
+
         $social = $s->field('Колонка 3', 'Соц сети', 'repeat', false);
         $social_items = [];
         foreach ($social as $elm) {

@@ -56,9 +56,8 @@
         <div class="input-block input-block-message">
             <label for="message"
                 class="label-input color-white">{{ $s->field('Форма обратной связи', 'Описание поля Message', 'text', true, 'Message') }}</label>
-            <input class='input extra-text'
-                placeholder="{{ $s->field('Форма обратной связи', 'Описание поля Message', 'text', true, 'Your message ') }}"
-                type="text" required name="message">
+            <textarea rows="5" cols="33" class='input extra-text'  placeholder="{{ $s->field('Форма обратной связи', 'Описание поля Message', 'text', true, 'Your message ') }}"
+                required name="message"></textarea>
         </div>
     </div>
     <div class="button-block">
@@ -109,7 +108,10 @@
 @desktopcss
 
 <style>
-
+    textarea {
+        resize: none;
+        height: 55px;
+    }
     .form-contact .select {
         height: 35px;
         width: 400px;
@@ -581,6 +583,10 @@
 
     .message.success {
         color: var(--color-green2);
+    }
+
+    textarea {
+        resize: none;
     }
 </style>
 

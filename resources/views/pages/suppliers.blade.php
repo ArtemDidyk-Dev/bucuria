@@ -76,7 +76,7 @@
                     {{ $s->field('Форма обратной связи', 'Описание', 'textarea', true, 'Contact us and we will be happy to answer all your questions') }}
                 </div>
                 <div class="contact-form">
-                    <x-inc.form nocv type />
+                        <x-inc.form nocv type />
                 </div>
             </div>
         </div>
