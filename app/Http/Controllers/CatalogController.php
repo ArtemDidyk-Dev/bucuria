@@ -36,8 +36,7 @@ class CatalogController extends Controller
         if ($r->isMethod('post')) {
             $items_component = new CardItems($products);
             $pagination_component = new Pagination($count, $pagesize, $page, $paglink, true);
-            $filters_component = new Filters($tastes, $weights, $clearRoute, $activeTastes, $activeWeights);
-
+            $filters_component = new Filters($tastes, $weights, $clearRoute, $activeTastes, $activeWeights, $r->has('category'));
             return $this->response([
                 'html' => $items_component->render(),
                 'pagination' => $pagination_component->render(),
