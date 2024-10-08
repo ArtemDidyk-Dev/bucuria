@@ -6,13 +6,13 @@
         <div class="container mb">
 
             <div class="breadcrumbs-block">
-                <x-inc.breadcrumbs :breadcrumbs="$breadcrumbs" />
+                <x-inc.breadcrumbs :breadcrumbs="$breadcrumbs"/>
             </div>
 
             <div class="banner">
                 <div class="baner-image">
                     <img src="{{ $s->field('Каталог', 'Банер', 'photo', false, '/photos/1/catalog-banner.png') }}"
-                        alt="" class="banner-img">
+                         alt="" class="banner-img">
                     <div class="gradient-banner"></div>
                 </div>
                 <div class="banner-content">
@@ -35,18 +35,19 @@
 
             <div class="container">
 
-                    <div class="content-catalog-block">
-                        <div class="filter-item-product">
-                            @foreach ($categories as $category)
-                                <x-cards.filter-item :item="$category" />
-                            @endforeach
-                        </div>
+                <div class="content-catalog-block">
+                    <div class="filter-item-product">
+                        @foreach ($categories as $category)
+                            <x-cards.filter-item :item="$category"/>
+                        @endforeach
                     </div>
+                </div>
 
-                    <div class="content-catalog-block">
+                <div class="content-catalog-block">
                     <div id="filters" class="filter-block">
-                        <x-catalog.filters :tastes="$tastes" :weights="$weights" :clearRoute="$clearRoute" :activeTastes="$activeTastes"
-                            :activeWeights="$activeWeights" activeCategory={{$activeCategory}} />
+                        <x-catalog.filters :tastes="$tastes" :weights="$weights" :clearRoute="$clearRoute"
+                                           :activeTastes="$activeTastes"
+                                           :activeWeights="$activeWeights" activeCategory={{$activeCategory}} />
                         <x-inputs.download href="{{$s->field('Каталог', 'Файл', 'photo', true)}}">
                             {{$s->field('Каталог', 'Текст кнопки', 'text', true, 'download catalog')}}
                         </x-inputs.download>
@@ -60,12 +61,12 @@
                         </button>
 
                         <div id="content-block">
-                            <x-cards.card-items :items="$products" />
+                            <x-cards.card-items :items="$products"/>
                         </div>
 
                         <div id="pagination">
                             <x-inc.pagination :count="$count" :page="$page" :pagesize="$pagesize" :paglink="$paglink"
-                                :showmore="true" />
+                                              :showmore="true"/>
                         </div>
                     </div>
                 </div>
@@ -76,56 +77,102 @@
     <x-slot name="javascript">
         <script>
             async function makeFilters(loader = true) {
-
-                const clearRoute = document.querySelector('.filter').getAttribute('data-href')
-                let href = document.location.protocol + '//' + document.location.hostname + clearRoute
+                const clearRoute = document.querySelector('.filter').getAttribute('data-href');
+                let href = document.location.href; // Використовуємо поточний URL, щоб зберігати всі активні параметри
                 let url = new URL(href);
                 let params = url.searchParams;
 
-                let filters = document.querySelectorAll('.filter-item-checkbox')
-                let filters_sliders = document.querySelectorAll('.filter-item-slider')
-
+                // Обробляємо чекбокси фільтрів
+                let filters = document.querySelectorAll('.filter-item-checkbox');
                 filters.forEach(filter => {
-
-                    filter_fields = filter.querySelectorAll('input[name="filter-field"]:checked')
+                    let filter_fields = filter.querySelectorAll('input[name="filter-field"]:checked');
 
                     const filter_fields_values = [...filter_fields].map(element => {
                         return element.value;
                     }).join(',');
 
+                    // Видаляємо попередні фільтри та додаємо нові значення
                     if (filter_fields_values) {
-                        params.append(filter.dataset.id, filter_fields_values)
+                        params.set(filter.dataset.id, filter_fields_values);
+                    } else {
+                        params.delete(filter.dataset.id);
                     }
                 });
 
-                href = decodeURIComponent(url.toString())
+                // Обробляємо слайдери фільтрів
+                let filters_sliders = document.querySelectorAll('.filter-item-slider');
+                filters_sliders.forEach(slider => {
+                    const minValue = slider.querySelector('input[name="min-value"]').value;
+                    const maxValue = slider.querySelector('input[name="max-value"]').value;
 
-                const response = await post(href, {}, true, loader)
+                    // Додаємо мінімальне та максимальне значення як параметри, якщо вони задані
+                    if (minValue || maxValue) {
+                        params.set(slider.dataset.id + '_min', minValue);
+                        params.set(slider.dataset.id + '_max', maxValue);
+                    } else {
+                        // Видаляємо параметри, якщо вони пусті
+                        params.delete(slider.dataset.id + '_min');
+                        params.delete(slider.dataset.id + '_max');
+                    }
+                });
+
+                // Оновлюємо URL з новими параметрами
+                href = decodeURIComponent(url.toString());
+
+                const response = await post(href, {}, true, loader);
 
                 if (response.success) {
+                    document.querySelector('#content-block').innerHTML = response.data.html;
+                    document.querySelector('#pagination').innerHTML = response.data.pagination;
+                    document.querySelector('#filters').innerHTML = response.data.filters;
 
-                    document.querySelector('#content-block').innerHTML = response.data.html
-                    document.querySelector('#pagination').innerHTML = response.data.pagination
-                    document.querySelector('#filters').innerHTML = response.data.filters
-
-                    // document.querySelector('h1').innerHTML = response.data.h1
-                    // document.querySelector('title').innerHTML = response.data.meta_title
-                    // document.querySelector('meta[name="description"]').setAttribute('content', response.data.meta_description)
-
-                    history.pushState({}, '', href)
+                    history.pushState({}, '', href); // Оновлюємо історію браузера з новими параметрами
 
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth'
                     });
 
-                    // checkLazy()
-
-                } else {
-
+                    // checkLazy(); // Якщо у тебе є логіка для ленивого завантаження, активуй це
                 }
 
-                return false
+                return false;
+            }
+
+
+            const filterItem = document.querySelectorAll(".filter-product-item");
+            if (filterItem) {
+                filterItem.forEach(filter => {
+                    filter.addEventListener('click', (event) => {
+                        event.preventDefault();
+
+                        let link = window.location.href;
+                        let categorySlug = filter.getAttribute('data-link');
+                        let url = new URL(link);
+
+                        // Отримуємо масив категорій
+                        let currentCategories = url.searchParams.getAll('category[]');
+
+                        // Додаємо або видаляємо категорію
+                        if (!currentCategories.includes(categorySlug)) {
+                            currentCategories.push(categorySlug);
+                        } else {
+                            currentCategories = currentCategories.filter(category => category !== categorySlug);
+                        }
+
+                        // Очищаємо попередні 'category[]' параметри
+                        url.searchParams.delete('category[]');
+                        currentCategories.forEach(category => {
+                            url.searchParams.append('category[]', category);
+                        });
+
+                        // Переводимо URL у строку і декодуємо для отримання '[]' замість '%5B%5D'
+                        let decodedUrl = decodeURIComponent(url.toString());
+
+                        // Оновлюємо посилання
+                        window.location.href = decodedUrl;
+                    });
+                });
             }
         </script>
     </x-slot>
@@ -207,7 +254,7 @@
         border-radius: 50%;
     }
 
-    .checkbox-image-wrapper.active .containercheckbox input:checked~.checkmark {
+    .checkbox-image-wrapper.active .containercheckbox input:checked ~ .checkmark {
         background: var(--color-white);
         border: none;
     }
@@ -393,6 +440,7 @@
     .catalog-cards-block {
         margin-left: 50px;
     }
+
     .checkbox-image.hover-active {
         opacity: 0;
         position: absolute;
@@ -417,6 +465,7 @@
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 13px;
     }
+
     .input-wrapper-label {
         font-size: 15px;
         font-weight: 400;
@@ -424,21 +473,25 @@
         color: #747474;
         margin-bottom: 6px;
     }
+
     .input-wrapper {
         border: 1px solid #D9D9D9;
         border-radius: 8px;
         position: relative;
         display: flex;
     }
+
     .input-text {
         width: 100%;
         padding: 8px 15px;
         border: 0;
         border-radius: 8px;
     }
+
     .accordion-filters-box {
         padding-bottom: 18px;
     }
+
     .price-slider {
         margin-top: 62px;
     }
@@ -448,10 +501,12 @@
         transition: .3s;
         opacity: 0;
     }
-    .filters-box.active{
+
+    .filters-box.active {
         max-height: 132px;
         opacity: 1;
     }
+
     .accordion-filters-box.active .arrow-filter {
         transform: rotate(-90deg);
     }
@@ -747,7 +802,7 @@
         border-radius: 50%;
     }
 
-    .checkbox-image-wrapper.active .containercheckbox input:checked~.checkmark {
+    .checkbox-image-wrapper.active .containercheckbox input:checked ~ .checkmark {
         background: var(--color-white);
         border: none;
     }
@@ -769,6 +824,7 @@
     .panel-images .checkbox-image-wrapper:nth-child(5n) {
         margin-right: 0;
     }
+
     .checkbox-image.hover-active {
         opacity: 0;
         position: absolute;
@@ -787,11 +843,13 @@
     .checkbox:hover .checkbox-image.hover-active {
         opacity: 1;
     }
+
     .filters-input-prices {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 13px;
     }
+
     .input-wrapper-label {
         font-size: 15px;
         font-weight: 400;
@@ -799,21 +857,25 @@
         color: #747474;
         margin-bottom: 6px;
     }
+
     .input-wrapper {
         border: 1px solid #D9D9D9;
         border-radius: 8px;
         position: relative;
         display: flex;
     }
+
     .input-text {
         width: 100%;
         padding: 8px 15px;
         border: 0;
         border-radius: 8px;
     }
+
     .accordion-filters-box {
         padding-bottom: 18px;
     }
+
     .price-slider {
         margin-top: 52px;
         margin-left: 15px;
@@ -825,10 +887,12 @@
         transition: .3s;
         opacity: 0;
     }
-    .filters-box.active{
+
+    .filters-box.active {
         max-height: 132px;
         opacity: 1;
     }
+
     .accordion-filters-box.active .arrow-filter {
         transform: rotate(-90deg);
     }

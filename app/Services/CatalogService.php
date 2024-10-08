@@ -7,27 +7,27 @@ use App\Models\Offer;
 use App\Models\Product;
 use App\Models\Taste;
 use App\Models\Weight;
+use Illuminate\Support\Collection;
 use Single;
 
 class CatalogService
 {
     private $page;
-    private Category $category;
     private $slugParams;
     private $paglink;
     private $tastes;
     private $weights;
     private $activeTastes;
     private $activeWeights;
-
+    private $categories;
     private $taste;
     private $weight;
 
     public const PAGESIZE = 24;
 
-    public function __construct(Category $category)
+    public function __construct(?array $categories)
     {
-        $this->category = $category;
+        $this->categories = Category::whereIn('slug', $categories ?? [])->get();
         $this->page = request()->get('page', 1);
         $this->taste = request()->get('taste', '');
         $this->weight = request()->get('weight', '');
@@ -41,9 +41,9 @@ class CatalogService
     public function getProducts()
     {
         $query = $this->getOffersQuery()
-        ->with('weight')
-        ->with('tags')
-        ->with('product');
+            ->with('weight')
+            ->with('tags')
+            ->with('product');
 
         $this->loadTastes($query);
         $this->loadWeights($query);
@@ -51,9 +51,9 @@ class CatalogService
         $count = $query->count();
 
         $products = $query
-        ->skip(($this->page - 1) * self::PAGESIZE)
-        ->limit(self::PAGESIZE)
-        ->get();
+            ->skip(($this->page - 1) * self::PAGESIZE)
+            ->limit(self::PAGESIZE)
+            ->get();
 
         return [$products, $count];
     }
@@ -61,21 +61,21 @@ class CatalogService
     private function getOffersQuery()
     {
         return Offer::query()
-        ->whereIn('id_products', $this->loadProductsIdsQueryByCategory());
+            ->whereIn('id_products', $this->loadProductsIdsQueryByCategory());
     }
 
     private function loadProductsIdsQueryByCategory()
     {
         return Product::query()
-        ->select('id')
-        ->when(isset($this->category->id), function($q) {
-            $q->where('id_categories', $this->category->id);
-        })->get();
+            ->select('id')
+            ->when($this->categories->isNotEmpty(), function ($q) {
+                $q->whereIn('id_categories', $this->categories->pluck('id')->toArray());
+            })->get();
     }
 
     public function getTastes()
     {
-        if ($this->tastes  !== null) {
+        if ($this->tastes !== null) {
             return $this->tastes;
         }
 
@@ -83,23 +83,23 @@ class CatalogService
         $this->loadWeights($query);
 
         $tastes = Taste::whereIn('id', $query->select('id_tastes'))
-        ->orderBy('title', 'ASC')
-        ->get();
+            ->orderBy('title', 'ASC')
+            ->get();
 
         $activeTastesSlug = !empty($this->taste) ? explode(',', $this->taste) : [];
 
-        $this->tastes = $tastes->each(function($item) use ($activeTastesSlug) {
-            
+        $this->tastes = $tastes->each(function ($item) use ($activeTastesSlug) {
+
             $filterLink = parse_url(rawurldecode($this->paglink))['path'];
             $filterLinkParams = [
-                'taste' => implode(',', $activeTastesSlug), 
-                ...$this->slugParams
+                'taste' => implode(',', $activeTastesSlug),
+                ...$this->slugParams,
             ];
 
             if (in_array($item->slug, $activeTastesSlug)) {
 
-				$item->active = true;
-                
+                $item->active = true;
+
                 unset($activeTastesSlug[array_search($item->slug, $activeTastesSlug)]);
                 if (!empty($activeTastesSlug)) {
                     $filterLinkParams['taste'] = implode(',', $activeTastesSlug);
@@ -116,7 +116,7 @@ class CatalogService
 
             $params = rawurldecode(http_build_query($filterLinkParams));
             $item->link = $filterLink.($params ? '?'.$params : '');
-		});
+        });
 
         return $this->tastes;
     }
@@ -128,10 +128,10 @@ class CatalogService
 
         $offersTastes = $productsIdsQuery->get()->groupBy('id_tastes');
 
-        return $this->getTastes()->each(function($taste) use ($offersTastes) {
+        return $this->getTastes()->each(function ($taste) use ($offersTastes) {
             $taste->products_count = isset($offersTastes[$taste->id]) ? $offersTastes[$taste->id]->count() : 0;
         });
-    }   
+    }
 
     private function getActiveTastesIds()
     {
@@ -142,11 +142,11 @@ class CatalogService
         $activeTastesSlug = !empty($this->taste) ? explode(',', $this->taste) : [];
 
         $this->activeTastes = Taste::whereIn('slug', $activeTastesSlug)
-        ->get('id')
-        ->pluck('id');
+            ->get('id')
+            ->pluck('id');
 
         return $this->activeTastes;
-    } 
+    }
 
     public function loadTastes($query)
     {
@@ -167,23 +167,23 @@ class CatalogService
         $this->loadTastes($query);
 
         $weights = Weight::whereIn('id', $query->select('id_weights'))
-        ->orderBy('title', 'ASC')
-        ->get();
+            ->orderBy('title', 'ASC')
+            ->get();
 
         $activeWeightsSlug = !empty($this->weight) ? explode(',', $this->weight) : [];
 
-        $this->weights = $weights->each(function($item) use ($activeWeightsSlug) {
-            
+        $this->weights = $weights->each(function ($item) use ($activeWeightsSlug) {
+
             $filterLink = parse_url(rawurldecode($this->paglink))['path'];
             $filterLinkParams = [
-                'weight' => implode(',', $activeWeightsSlug), 
-                ...$this->slugParams
+                'weight' => implode(',', $activeWeightsSlug),
+                ...$this->slugParams,
             ];
 
             if (in_array($item->slug, $activeWeightsSlug)) {
 
-				$item->active = true;
-                
+                $item->active = true;
+
                 unset($activeWeightsSlug[array_search($item->slug, $activeWeightsSlug)]);
                 if (!empty($activeWeightsSlug)) {
                     $filterLinkParams['weight'] = implode(',', $activeWeightsSlug);
@@ -200,7 +200,7 @@ class CatalogService
 
             $params = rawurldecode(http_build_query($filterLinkParams));
             $item->link = $filterLink.($params ? '?'.$params : '');
-		});
+        });
 
         return $this->weights;
     }
@@ -212,10 +212,10 @@ class CatalogService
 
         $offersWeights = $productsIdsQuery->get()->groupBy('id_weights');
 
-        return $this->getWeights()->each(function($weight) use ($offersWeights) {
+        return $this->getWeights()->each(function ($weight) use ($offersWeights) {
             $weight->products_count = isset($offersWeights[$weight->id]) ? $offersWeights[$weight->id]->count() : 0;
         });
-    }   
+    }
 
     private function getActiveWeightsIds()
     {
@@ -226,11 +226,11 @@ class CatalogService
         $activeWeightsSlug = !empty($this->weight) ? explode(',', $this->weight) : [];
 
         $this->activeWeights = Weight::whereIn('slug', $activeWeightsSlug)
-        ->get(['id'])
-        ->pluck('id');
+            ->get(['id'])
+            ->pluck('id');
 
         return $this->activeWeights;
-    } 
+    }
 
     public function loadWeights($query)
     {
@@ -243,16 +243,7 @@ class CatalogService
 
     public function getClearRoute()
     {
-        if (isset($this->category->slug)) {
-            return route('catalog', [ $this->category->slug ], false);
-        } 
-
         return route('catalog', [], false);
-    }
-
-
-    public function getActiveCategory() {
-       return $this->category->slug;
     }
 
     public function getBreadcrumbs()
@@ -266,12 +257,6 @@ class CatalogService
             ],
         ];
 
-        if (isset($this->category->slug)) {
-            $breadcrumbs[] =[
-                'title' => $this->category->title,
-                'link' => route('catalog', [$this->category->slug], false),
-            ];
-        }
 
         return $breadcrumbs;
     }
@@ -280,9 +265,6 @@ class CatalogService
     {
         $s = new Single('Продукты', 10, 1);
 
-        if (isset($this->category->slug)) {
-            return $this->category->title;
-        }
 
         return $s->field('Каталог', 'Заголовок', 'text', true, 'Catalog');
     }
@@ -291,18 +273,10 @@ class CatalogService
     {
         $s = new Single('Продукты', 10, 1);
 
-        if (isset($this->category->slug)) {
-            return [
-                $this->category->meta_title,
-                $this->category->meta_description,
-                $this->category->meta_keywords
-            ];
-        }
-
-		return [
+        return [
             $s->field('Каталог Meta', 'Meta Title', 'textarea', true, 'Bucuria | Catalog'),
             $s->field('Каталог Meta', 'Meta Description', 'textarea', true, 'Bucuria | Catalog'),
-            $s->field('Каталог Meta', 'Meta Keywords', 'textarea', true, 'Bucuria | Catalog')
+            $s->field('Каталог Meta', 'Meta Keywords', 'textarea', true, 'Bucuria | Catalog'),
         ];
     }
 }

@@ -1,4 +1,4 @@
-<a href="{{ route('catalog', [$item->slug], false) }}" class="filter-product-item {{ $item->active ? 'active' : '' }}">
+<a data-link="{{$item->slug}}" class="filter-product-item {{ $item->active ? 'active' : '' }}">
     <div class="filter-product-img-box">
         <img src="{{ $item->image }}" class="filter-product-img">
     </div>

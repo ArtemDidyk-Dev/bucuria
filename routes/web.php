@@ -42,7 +42,7 @@ Route::group([
 	Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 	Route::get('/certificates', [PageController::class, 'certificates'])->name('certificates');
 	Route::any('/search', [SearchController::class, 'search'])->name('search');
-	Route::any('/catalog/{category:slug?}', [CatalogController::class, 'catalog'])->name('catalog');
+	Route::any('/catalog', [CatalogController::class, 'catalog'])->name('catalog');
 	Route::any('/product/{slug}', [ProductController::class, 'product'])->name('product');
 	Route::any('/shops', [ShopController::class, 'shops'])->name('shops');
 	Route::any('/account', [AccountController::class, 'account'])->name('account');
