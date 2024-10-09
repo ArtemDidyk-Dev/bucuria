@@ -105,15 +105,21 @@
             $(window).on("scroll", function() {
                 const scrollOffset = this.scrollY
                 historyBlocks.forEach(historyBlock => {
-
+                    let yearBlock = document.querySelector('#year-'+historyBlock.getAttribute('id'));
                     if (scrollOffset > historyBlock.offsetTop - headerHeight) {
-                        document.querySelector('#year-'+historyBlock.getAttribute('id')).classList.add('active')
+                        if(yearBlock) {
+                            yearBlock.classList.add('active')
+                        }
                     } else {
-                        document.querySelector('#year-'+historyBlock.getAttribute('id')).classList.remove('active')
+                        if(yearBlock) {
+                            yearBlock.classList.remove('active')
+                        }
                     }
 
                     if (scrollOffset > historyBlock.offsetTop - headerHeight + $(historyBlock).height()) {
-                        document.querySelector('#year-'+historyBlock.getAttribute('id')).classList.remove('active')
+                        if(yearBlock) {
+                            yearBlock.classList.remove('active')
+                        }
                     }
                 });
             })

@@ -328,14 +328,29 @@
         background: none;
         border: none;
         border-bottom: 1px solid var(--color-white);
-        ;
+        color: #fff;
         margin-right: 27px;
         padding: 12px 10px 10px 0;
     }
 
-    input::placeholder {
-        color: var(--color-white);
+    input::placeholder,textarea::placeholder {
+        color: #fff !important;
     }
+
+    /* Стили для автозаполнения в Chrome */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+        box-shadow: 0 0 0 1000px transparent inset !important;
+        -webkit-text-fill-color: #ffff !important;
+        color: #fff !important;
+        transition: background-color 5000s ease-in-out 0s !important; /* Избежание смены цвета фона */
+        caret-color: #fff  !important; /* Цвет каретки */
+    }
+
+
 
     .label-input {
         font-family: "Istok Web", sans-serif ;
@@ -555,6 +570,7 @@
         border: none;
         border-bottom: 1px solid var(--color-white);
         padding: 12px 10px 10px 0;
+        color: #fff;
     }
 
     input::placeholder {
@@ -587,6 +603,23 @@
 
     textarea {
         resize: none;
+    }
+
+    input::placeholder,textarea::placeholder {
+        color: #fff !important;
+    }
+
+    /* Стили для автозаполнения в Chrome */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+        box-shadow: 0 0 0 1000px transparent inset !important;
+        -webkit-text-fill-color: #ffff !important;
+        color: #fff !important;
+        transition: background-color 5000s ease-in-out 0s !important; /* Избежание смены цвета фона */
+        caret-color: #fff  !important; /* Цвет каретки */
     }
 </style>
 

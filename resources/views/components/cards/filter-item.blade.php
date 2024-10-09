@@ -3,6 +3,11 @@
         <img src="{{ $item->image }}" class="filter-product-img">
     </div>
     <div class="filter-product-item-title {{ $item->active ? 'active' : '' }}">{{ $item->title }}</div>
+    @if($item->active)
+        <span class="filter-product-close">
+            &#10006;
+        </span>
+    @endif
 </a>
 
 @desktopcss
@@ -18,6 +23,7 @@
         margin-right: 28px;
         margin-bottom: 35px;
         cursor: pointer;
+        position: relative;
     }
 
     .filter-product-item:nth-child(6n) {
@@ -86,6 +92,18 @@
     .filter-product-item:hover .filter-product-img-box {
         border: 3px solid #C81317;
     }
+
+    .filter-product-close {
+        color: #d94246;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        box-shadow: 0px -1px 39px 1px rgba(0, 0, 0, 0.42);
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        line-height: 27px;
+    }
 </style>
 
 @mobilecss
@@ -100,6 +118,7 @@
         margin-right: 22px;
         margin-bottom: 20px;
         cursor: pointer;
+        position: relative;
     }
 
     .filter-product-item:nth-child(11n) {
@@ -160,6 +179,19 @@
     }
     .filter-product-img {
         transition: .3s;
+    }
+
+    .filter-product-close {
+        color: #d94246;
+        position: absolute;
+        box-shadow: 0px -1px 39px 1px rgba(0, 0, 0, 0.42);
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        right: -8px;
+        font-size: 13px;
+        line-height: 18px;
+        top: -4px;
     }
 </style>
 @endcss

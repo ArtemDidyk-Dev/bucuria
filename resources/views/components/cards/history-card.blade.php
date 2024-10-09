@@ -16,7 +16,7 @@
                     @endif
                 </div>
 
-                <img src="{{ $image }}" alt="" class="history-card-img" >
+                <img width="600" height="530" src="{{ $image }}" alt="" class="history-card-img" >
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
     <div class="history-card">
         <div class="container">
             <div class="history-card-content">
-                <img src="{{ $image }}" alt="" class="history-card-img">
+                <img  width="600" height="530" src="{{ $image }}" alt="" class="history-card-img">
                 <div class="history-card-item left">
                     <div class="history-card-title color-red">
                         <div class="h4 history-year-red">{{ $year }}</div>
@@ -47,6 +47,7 @@
 
     .history-card-item {
         padding-right: 20px;
+        max-width: 580px;
     }
     .history-card-item.left {
         padding-right: 0px;
@@ -85,8 +86,9 @@
     .history-card-img {
         display: block;
         object-fit: cover;
+        width: 600px;
+        height: 530px;
         max-width: 600px;
-        height: 100%;
     }
 
     .history-card-content {
