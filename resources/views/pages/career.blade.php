@@ -95,12 +95,6 @@
 
                 <div class="container">
                     <div class="big-image-slider">
-                        <div class="card-block-arrow-left" onclick="prev_card_block('big-image-slider-item2')">
-                            <img src="/images/icons/left-arrow.png">
-                        </div>
-                        <div class="card-block-arrow-right" onclick="next_card_block('big-image-slider-item2')">
-                            <img src="/images/icons/right-arrow.png">
-                        </div>
                         <div class="big-image-slider-item" id="big-image-slider-item2">
                             @foreach ($galery_items as $photo)
                                 <img src="{{ $photo[0] }}" class="slider-img">

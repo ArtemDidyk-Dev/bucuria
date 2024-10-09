@@ -110,7 +110,7 @@
 <style>
     textarea {
         resize: none;
-        height: 55px;
+        height: 46px;
     }
     .form-contact .select {
         height: 35px;
