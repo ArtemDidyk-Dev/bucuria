@@ -690,6 +690,7 @@
         scroll-snap-type: x mandatory;
         scroll-behavior: smooth;
         transition: .3s;
+        gap: 13px;
     }
 
     .menu {

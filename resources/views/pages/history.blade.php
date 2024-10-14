@@ -57,7 +57,7 @@
             <div class="year-menu">
                 @foreach ($cards_items as $key => $item)
                     @if(!empty($item[0]))
-                        <a href="#{{ $key }}" class="year-link color-white" id="year-{{ $key }}">{{ $item[0] }}</a>
+                        <a href="javascript:scrollToYear('{{ $key + 1 }}')" class="year-link color-white" id="year-{{ $key + 1 }}">{{ $item[0] }}</a>
                     @endif
                 @endforeach
             </div>
@@ -65,21 +65,23 @@
     </div>
 
 
-    <div class="big-card-height-small-section history">
+    <div class="big-card-height-small-section history history-animated-block" id="history-0">
         <div class="container">
             <x-cards.big-card-height-small
                 title="{{ $s->field('Блок 1', 'Заголовок', 'text', true, 'Life is sweeter with us…') }}"
                 description="{{ $s->field('Блок 1', 'Текст', 'textarea', true, 'The trademark SA «Bucuria» is the visit card of Moldova. Today this is the largest enterprise producing confectionery in the republic. For more than six decades the company SA «Bucuria» gives joy to the children and grown-ups, totally corresponding to the motto – «Life is sweeter with us…»') }}" />
         </div>
     </div>
+    <div class="history-height" style="display: none;" id="history-height-0"></div>
 
     @foreach ($cards_items as $key => $item)
-        <div class="history-block" id="{{ $key }}">
+        <div class="history-block history-animated-block" id="history-{{ $key + 1 }}">
             <div class="container">
                 <x-cards.history-card year="{{ $item[0] }}" title="{{ $item[1] }}"
                                       description="{{ $item[2] }}" image="{{ $item[3] }}" :count="$key" />
             </div>
         </div>
+        <div class="history-height" style="display: none;" id="history-height-{{ $key + 1 }}"></div>
     @endforeach
 
     <div class="main">
@@ -99,30 +101,129 @@
     <x-slot name="javascript">
         <script>
 
-            const historyBlocks = document.querySelectorAll('.history-block')
-            const headerHeight = $("header").height() + $('.year-menu-section').height()
+            // const historyBlocks = document.querySelectorAll('.history-block')
+            // const headerHeight = $("header").height() + $('.year-menu-section').height()
 
-            $(window).on("scroll", function() {
-                const scrollOffset = this.scrollY
-                historyBlocks.forEach(historyBlock => {
-                    let yearBlock = document.querySelector('#year-'+historyBlock.getAttribute('id'));
-                    if (scrollOffset > historyBlock.offsetTop - headerHeight) {
-                        if(yearBlock) {
-                            yearBlock.classList.add('active')
-                        }
-                    } else {
-                        if(yearBlock) {
-                            yearBlock.classList.remove('active')
-                        }
-                    }
+            // function toggleYears() {
 
-                    if (scrollOffset > historyBlock.offsetTop - headerHeight + $(historyBlock).height()) {
-                        if(yearBlock) {
-                            yearBlock.classList.remove('active')
-                        }
-                    }
-                });
-            })
+            //     const scrollOffset = this.scrollY
+            //     historyBlocks.forEach(historyBlock => {
+            //         let yearBlock = document.querySelector('#year-'+historyBlock.getAttribute('id'));
+            //         if (scrollOffset > historyBlock.offsetTop - headerHeight) {
+            //             if(yearBlock) {
+            //                 yearBlock.classList.add('active')
+            //             }
+            //         } else {
+            //             if(yearBlock) {
+            //                 yearBlock.classList.remove('active')
+            //             }
+            //         }
+
+            //         if (scrollOffset > historyBlock.offsetTop - headerHeight + $(historyBlock).height()) {
+            //             if(yearBlock) {
+            //                 yearBlock.classList.remove('active')
+            //             }
+            //         }
+            //     });
+            // }
+
+let historyBlockAnims, historyBlockHeights, topOffset;
+const yearIds = [1, 2, 5, 6, 7, 8, 9, 11, 13, 14, 15];
+
+function resizeFakeHeights() {
+    $('.history-height').each(function () {
+        this.style.height = this.previousElementSibling.offsetHeight + 'px';
+
+        if ($(window).width() > 999) {
+            topOffset = $('header').height() + $('.year-menu-section').height();
+        } else {
+            topOffset = $('.year-menu-section').height();
+        }
+    });
+}
+
+function initAnimation() {
+    historyBlockAnims = document.querySelectorAll('.history-animated-block');
+    historyBlockHeights = document.querySelectorAll('.history-height');
+}
+
+function animateHistoryBlocks() {
+    let lastId = 0;
+
+    for (let i = 0; i < historyBlockAnims.length - 1; i++) {
+        if (historyBlockAnims[i].getBoundingClientRect().top <= topOffset) {
+            historyBlockAnims[i].classList.add('fixed');
+            historyBlockAnims[i].style.top = topOffset + 'px';
+            historyBlockHeights[i].style.display = '';
+            lastId = i;
+        }
+
+        if (historyBlockHeights[i].getBoundingClientRect().top > topOffset) {
+            historyBlockAnims[i].classList.remove('fixed');
+            historyBlockAnims[i].style.top = '';
+            historyBlockHeights[i].style.display = 'none';
+        }
+    }
+
+    markYear(lastId);
+}
+
+function markYear(lastId) {
+    $('.year-link').removeClass('active');
+
+    for (let j = yearIds.length; j >= 0; j--) {
+        if (yearIds[j] <= lastId) {
+            $('#year-' + yearIds[j]).addClass('active');
+            break;
+        }
+    }
+}
+
+function scrollToYear(i) {
+    let baseOffset = 0;
+
+    if ($(window).width() > 999) {
+        baseOffset = $('.banner-section').height();
+    } else {
+        baseOffset = $('.banner-section').height() + $('.banner-section').offset().top;
+    }
+
+    let blocksOffset = 0;
+
+    for (let j = 0; j < i; j++) {
+        blocksOffset += $('#history-height-' + j).height();
+    }
+
+    const totalOffset = baseOffset + blocksOffset + 25;
+
+    $('html, body').animate({
+        scrollTop: totalOffset
+    });
+}
+
+
+function runIfWideScreen() {
+    if ($(window).width() > 999) {
+       
+        initAnimation();
+        animateHistoryBlocks();
+        resizeFakeHeights();
+
+        $(window).on("resize", resizeFakeHeights);
+        $(window).on("scroll", animateHistoryBlocks);
+    }
+}
+
+$(document).ready(function () {
+    runIfWideScreen();
+
+
+    $(window).on("resize", function () {
+        if ($(window).width() > 999) {
+            runIfWideScreen();
+        }
+    });
+});
 
         </script>
     </x-slot>
@@ -142,6 +243,23 @@
 </x-layout>
 @desktopcss
 <style>
+    .footer-block,
+    .main {
+        position: relative;
+        z-index: 3;
+    }
+
+    .history-animated-block {
+        position: relative;
+        z-index: 2;
+    }
+
+    .history-animated-block.fixed {
+        position: fixed;
+        z-index: 1;
+        width: 100%;
+    }
+
     .history .card-title-small.h2.color-red {
         text-transform: none;
     }
@@ -331,7 +449,7 @@
 
     .year-menu-section {
         position: sticky;
-        top: 110px;
+        top: 113px;
         left: 0;
         width: 100%;
         height: 46px;
@@ -342,6 +460,23 @@
 </style>
 @mobilecss
 <style>
+    .footer-block,
+    .main {
+        position: relative;
+        z-index: 3;
+    }
+
+    .history-animated-block {
+        position: relative;
+        z-index: 2;
+    }
+
+    .history-animated-block.fixed {
+        position: fixed;
+        z-index: 1;
+        width: 100%;
+    }
+
     .history .card-title-small.h2.color-red {
         text-transform: none;
     }
