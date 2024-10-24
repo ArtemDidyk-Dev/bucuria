@@ -1,6 +1,8 @@
 <div @if ($right) class="description-card-right" @else class="description-card-left" @endif>
     <div class="description-card-title h4 color-red">{!! Field::enter_to_br($title) !!}</div>
+    @if($description)
     <div class="description-card-desc extra-text color-red">{!! html_entity_decode(Field::enter_to_br($description)) !!}</div>
+    @endif
 </div>
 
 @desktopcss

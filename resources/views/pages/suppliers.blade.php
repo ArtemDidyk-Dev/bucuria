@@ -40,7 +40,6 @@
         </div>
     </div>
 
-
     <div class="big-image-card-section">
         <div class="container">
             <x-cards.big-image-card
@@ -62,6 +61,7 @@
         <div class="container">
             <x-cards.big-image-card
                 image="{{ $s->field('Блок 3', 'Картинка', 'photo', true, '/images/partners3.png') }}"
+                description="{!! $s->field('Блок 3', 'Описание', 'ckeditor', true, '') !!}"
                 descriptionBlockTitle="{{ $s->field('Блок 3', 'Заголовок', 'textarea', true, 'Send us your suggestions by e-mail:office@bucuria.md') }}"
                 top />
         </div>

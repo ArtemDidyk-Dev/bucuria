@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="descrtiption-card-block">
-        @if ($descriptionBlockDesc)
+        @if ($descriptionBlockDesc || $descriptionBlockTitle)
             @if ($descriptionBlockRight)
                 <x-cards.description-card :title="$descriptionBlockTitle" :description="$descriptionBlockDesc" right />
             @else
