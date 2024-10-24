@@ -24,7 +24,7 @@
         background: var(--color-red);
         border-radius: 10px;
         padding: 24px;
-        max-width: 400px;
+        max-width: fit-content;
         width: 100%;
         z-index: 99999999999;
         transform: translateX(calc(-100% - 50px));
@@ -92,7 +92,7 @@
         bottom: 24px;
         background: var(--color-red);
         border-radius: 10px;
-        max-width: 342px;
+        max-width: fit-content;
         z-index: 99999999999;
         transform: translateX(calc(-100% - 50px));
         left: 0px;
