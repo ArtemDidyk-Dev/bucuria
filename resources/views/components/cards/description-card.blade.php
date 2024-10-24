@@ -41,7 +41,7 @@
     .description-card-desc {
         margin-top: 15px;
         overflow: auto;
-        padding-right: 10px;
+        padding-right: 25px;
     }
 
     ::-webkit-scrollbar {
