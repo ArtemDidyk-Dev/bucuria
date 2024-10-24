@@ -9,6 +9,8 @@
     .product-weight-block {
         display: flex;
         justify-content: flex-start;
+        flex-wrap: wrap;
+        row-gap: 10px;
     }
 
     .product-weight-item {
@@ -43,6 +45,8 @@
     .product-weight-block {
         display: flex;
         justify-content: flex-start;
+        flex-wrap: wrap;
+        row-gap: 8px;
     }
 
     .product-weight-item {

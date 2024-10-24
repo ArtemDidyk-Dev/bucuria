@@ -45,12 +45,21 @@
                     ];
                 }
             @endphp
+            @if(!empty($departmentsItems))
             <x-inputs.select
                 :label="$s->field('Форма обратной связи', 'Описание поля Отдел', 'text', true, 'Department')"
                 name="department"
                 :items="$departmentsItems"
             />
-
+            @else
+                <div class="input-block">
+                    <label for="department"
+                           class="label-input color-white">{{ $s->field('Форма обратной связи', 'Описание поля Отдел', 'text', true, 'Department')}}</label>
+                    <input class="input extra-text"
+                           placeholder="{{ $s->field('Форма обратной связи', 'Описание поля Отдел', 'text', true, 'Department') }}"
+                           type="text"  name="department">
+                </div>
+            @endif
         @endif
 
         <div class="input-block input-block-message">

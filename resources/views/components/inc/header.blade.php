@@ -28,7 +28,7 @@
                                 src="/images/icons/right-arrow.png"></div>
                         <div class="products-menu " id="products-menu">
                             @foreach ($categories as $category)
-                                <a href="{{ route('catalog', [$category->slug], false) }}" class="menu-item">
+                                <a href="{{ route('catalog') . '?category[]=' . $category->slug }}" class="menu-item">
                                     <img src="{{ $category->image }}" class="menu-item-img">
                                     <div class="menu-item-title">{{ $category->title }}</div>
                                 </a>

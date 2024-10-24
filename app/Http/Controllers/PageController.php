@@ -78,6 +78,7 @@ class PageController extends Controller
 			$data['file'] = '';
 		}
 
+        $data = array_merge($data, $r->except('file'));
 		$career = new Career($data);
 		$career->save();
 
@@ -104,4 +105,6 @@ class PageController extends Controller
         $this->pageAccess->access($standart, $request);
         return redirect()->back();
     }
+
+
 }

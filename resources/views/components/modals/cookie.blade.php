@@ -24,7 +24,8 @@
         background: var(--color-red);
         border-radius: 10px;
         padding: 24px;
-        max-width: 342px;
+        max-width: 400px;
+        width: 100%;
         z-index: 99999999999;
         transform: translateX(calc(-100% - 50px));
     }

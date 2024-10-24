@@ -10,18 +10,19 @@
                         alt="" class="banner-img mobile">
                     <div class="gradient-banner"></div>
                 </div>
-                <div class="banner-content">
-                    <div class="banner-title h1 color-white">
-                        {!! Field::enter_to_br(
-                            $s->field('Баннер', 'Заголовок', 'textarea', true, 'Welcome to the biggest factory of chocolates from Moldova'),
-                        ) !!}
-                    </div>
+{{--                <div class="banner-content">--}}
+{{--                  --}}
+{{--                        <div class="banner-title h1 color-white">--}}
+{{--                            {!! Field::enter_to_br(--}}
+{{--                                $s->field('Баннер', 'Заголовок', 'textarea', true, 'Welcome to the biggest factory of chocolates from Moldova'),--}}
+{{--                            ) !!}--}}
+{{--                        </div>--}}
+{{--                    <div class="banner-desc h1 subtitle color-white">--}}
+{{--                        {!! Field::enter_to_br($s->field('Баннер', 'Описание', 'textarea', true, 'With us life is sweeter!')) !!}--}}
 
-                    <div class="banner-desc h1 subtitle color-white">
-                        {!! Field::enter_to_br($s->field('Баннер', 'Описание', 'textarea', true, 'With us life is sweeter!')) !!}
-
-                    </div>
-                </div>
+{{--                    </div>--}}
+{{--                  --}}
+{{--                </div>--}}
             </div>
         </div>
 

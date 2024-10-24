@@ -17,7 +17,7 @@
                 <div class="baner-image">
                     <img src="{{ $s->field('Баннер', 'Картинка', 'photo', false, '/images/search-baner.png') }}"
                         alt="" class="banner-img">
-                    <div class="gradient-banner"></div>
+                    <div class="big-image-card-gradient"></div>
                 </div>
                 <div class="banner-content">
                     <div class="banner-title h2 color-white">
@@ -58,7 +58,6 @@
                         <x-inputs.select :label="$s->field('Поиск', 'Заголовок', 'text', true, 'SEARCH BY COUNTRY')" :placeholder="$s->field('Поиск', 'Выберите страну', 'text', true, 'Select country')" name='location' :items="$countries"
                             action="changeCountry(this)" />
                         <div class="location-shops">
-
                             @foreach ($shopsItems as $item)
                                 <div class="location-shop" data-country="{{ $item[1] }}"
                                     data-lat="{{ $item[7] }}" data-lon="{{ $item[8] }}">
@@ -423,6 +422,19 @@
         justify-content: space-between;
     }
 
+    .big-image-card-gradient {
+        display: block;
+        position: absolute;
+        background-repeat: no-repeat;
+        z-index: 1;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        background: radial-gradient(74% 74% at 50% 55.43%, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.00) 100%);
+        object-fit: cover;
+    }
+
     .location-shops {
         display: flex;
         flex-direction: column;
@@ -611,6 +623,19 @@
 </style>
 @mobilecss
 <style>
+    .big-image-card-gradient {
+        display: block;
+        position: absolute;
+        background-repeat: no-repeat;
+        z-index: 1;
+        width: 100%;
+        height: 500px;
+        top: 0;
+        left: 0;
+        background: transparent;
+        background: radial-gradient(74% 74% at 50% 55.43%, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.00) 100%);
+        object-fit: cover;
+    }
     .breadcrumbs-block {
         z-index: 2;
     }
