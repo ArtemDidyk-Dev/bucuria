@@ -1,5 +1,4 @@
 <?php if (!empty($pagination)): ?>
-
 @if ($showmore && isset($pagination['arrow_right']))
     <div class="show-more-wrapper btn-pagination" onclick="make_pagination(this, true); return false;">
 
@@ -15,14 +14,14 @@
 
             {{-- <?php if (isset($pagination['arrow_first'])): ?>
                     <div class="pagination-btn-wrapper" onclick="make_pagination(this); return false;">
-                        <a 
-                            href="<?php echo $pagination['link']; ?>" 
+                        <a
+                            href="<?php echo $pagination['link']; ?>"
                             class="pagination-btn"
                         >
                             <svg class="pagination-arrow-left" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6.59855 6.61582L13.074 0.158317C13.2861 -0.0531316 13.6296 -0.0527762 13.8414 0.15941C14.0531 0.37157 14.0525 0.715252 13.8403 0.926865L7.75034 7.00002L13.8405 13.0732C14.0527 13.2848 14.0532 13.6283 13.8416 13.8404C13.7355 13.9468 13.5964 14 13.4573 14C13.3185 14 13.18 13.9472 13.074 13.8415L6.59855 7.3842C6.49636 7.28254 6.43902 7.14418 6.43902 7.00002C6.43902 6.85587 6.49653 6.71767 6.59855 6.61582Z" fill="#333333"/>
                                 <path d="M1.59855 6.61582L8.07396 0.158317C8.28612 -0.0531316 8.62961 -0.0527762 8.84141 0.15941C9.05305 0.37157 9.05251 0.715252 8.84032 0.926865L2.75034 7.00002L8.84054 13.0732C9.0527 13.2848 9.05324 13.6283 8.84163 13.8404C8.73546 13.9468 8.59636 14 8.45726 14C8.31852 14 8.17997 13.9472 8.07399 13.8415L1.59855 7.3842C1.49636 7.28254 1.43902 7.14418 1.43902 7.00002C1.43902 6.85587 1.49653 6.71767 1.59855 6.61582Z" fill="#333333"/>
-                            </svg>         
+                            </svg>
                         </a>
                     </div>
                 <?php endif; ?> --}}
@@ -94,14 +93,14 @@
             <?php endif; ?>
             {{-- <?php if (isset($pagination['arrow_last'])): ?>
                     <div class="pagination-btn-wrapper pagination-btn-wrapper-arrow" onclick="make_pagination(this); return false;">
-                        <a 
-                            href="<?php echo $pagination['link']; ?><?php echo $pagination['separator']; ?>page=<?php echo $pagination['arrow_last']; ?>" 
+                        <a
+                            href="<?php echo $pagination['link']; ?><?php echo $pagination['separator']; ?>page=<?php echo $pagination['arrow_last']; ?>"
                             class="pagination-btn"
                         >
                             <svg class="pagination-arrow-right" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M8.40145 6.61582L1.92604 0.158317C1.71388 -0.0531316 1.37039 -0.0527762 1.15859 0.15941C0.946947 0.37157 0.947494 0.715252 1.15968 0.926865L7.24966 7.00002L1.15946 13.0732C0.947303 13.2848 0.946756 13.6283 1.15837 13.8404C1.26454 13.9468 1.40364 14 1.54274 14C1.68148 14 1.82003 13.9472 1.92601 13.8415L8.40145 7.3842C8.50364 7.28254 8.56098 7.14418 8.56098 7.00002C8.56098 6.85587 8.50347 6.71767 8.40145 6.61582Z" fill="#333333"/>
                                 <path d="M13.4015 6.61582L6.92604 0.158317C6.71388 -0.0531316 6.37039 -0.0527762 6.15859 0.15941C5.94695 0.37157 5.94749 0.715252 6.15968 0.926865L12.2497 7.00002L6.15946 13.0732C5.9473 13.2848 5.94676 13.6283 6.15837 13.8404C6.26454 13.9468 6.40364 14 6.54274 14C6.68148 14 6.82003 13.9472 6.92601 13.8415L13.4015 7.3842C13.5036 7.28254 13.561 7.14418 13.561 7.00002C13.561 6.85587 13.5035 6.71767 13.4015 6.61582Z" fill="#333333"/>
-                            </svg>       
+                            </svg>
                         </a>
                     </div>
                 <?php endif; ?> --}}
@@ -237,45 +236,35 @@
 @startjs
 <script>
     async function make_pagination(elm, showmore = false) {
+        const paginationBtn = showmore
+            ? elm.querySelector('.btn.color-white')
+            : elm.querySelector('.pagination-btn');
 
-        let href = elm.querySelector('.pagination-btn').getAttribute('href')
-
-        const response = await post(href, {}, true, true)
-
-        if (response.success) {
-
-            if (showmore) {
-
-                html = $('#content-block').child().html()
-
-                const elem = document.createElement('div');
-                $(elem).addClass('showmore-content')
-                $(elem).html(response.data.html)
-                request_html = $(elem).child().html()
-                elem.remove()
-
-                $('#content-block').child().html(html + request_html)
-
-            } else {
-                $('#content-block').html(response.data.html)
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            }
-
-            $('#pagination').html(response.data.pagination)
-
-            url = href
-            history.pushState({}, '', url)
-
-
-        } else {
-
+        if (!paginationBtn) {
+            console.error('Кнопка пагінації не знайдена!');
+            return false;
         }
 
-        return false
+        let href = paginationBtn.getAttribute('href');
 
+        const response = await post(href, {}, true, true);
+
+        if (response.success) {
+            $('#content-block').html(response.data.html);
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+
+            $('#pagination').html(response.data.pagination);
+            let url = decodeURIComponent(href.toString());
+            history.pushState({}, '', url);
+
+        } else {
+            // Обробка випадку, якщо відповідь була не успішною
+            console.error('Не вдалося отримати дані з сервера.');
+        }
+        return false;
     }
 </script>
 @endjs

@@ -69,7 +69,7 @@
                         Min weight, kg
                     </div>
                     <label class="input-wrapper">
-                        <input data-minprice="22" name="minPrice" type="text" class="input-text " placeholder="" value="8">
+                            <input data-minprice="22" name="minPrice" type="text" class="input-text " placeholder="" value="8">
                     </label>
                 </div>
                 <div class="filters-input-price">

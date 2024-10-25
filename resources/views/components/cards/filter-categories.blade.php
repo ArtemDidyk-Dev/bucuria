@@ -1,14 +1,19 @@
-<a data-link="{{$item->slug}}" class="filter-product-item {{ $item->active ? 'active' : '' }}" >
-    <div class="filter-product-img-box">
-        <img src="{{ $item->image }}" class="filter-product-img">
-    </div>
-    <div class="filter-product-item-title {{ $item->active ? 'active' : '' }}">{{ $item->title }}</div>
-    @if($item->active)
-        <span class="filter-product-close">
-            &#10006;
-        </span>
-    @endif
-</a>
+<div class="filter-item-product" id="categories">
+
+    @foreach ($categories as $item)
+        <a data-link="{{$item->slug}}" class="filter-product-item {{ $item->active ? 'active' : '' }}">
+            <div class="filter-product-img-box">
+                <img src="{{ $item->image }}" class="filter-product-img">
+            </div>
+            <div class="filter-product-item-title {{ $item->active ? 'active' : '' }}">{{ $item->title }}</div>
+            @if($item->active)
+                <span class="filter-product-close">
+                    &#10006;
+                </span>
+            @endif
+        </a>
+    @endforeach
+</div>
 
 @desktopcss
 

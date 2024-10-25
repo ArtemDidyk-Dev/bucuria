@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Services\CatalogService;
+use App\View\Components\Cards\FilterCategories;
 use Illuminate\Http\Request;
 use App\View\Components\Inc\Pagination;
 use App\View\Components\Cards\CardItems;
@@ -18,12 +19,12 @@ class CatalogController extends Controller
         $page = $r->get('page', 1);
         $pagesize = $catalogService::PAGESIZE;
         $paglink = $r->fullUrlWithoutQuery('page');
-
         $categories = Category::get()->each(function($item) use ($slugProduct) {
             if (in_array($item->slug, $slugProduct)) {
                 $item->active = true;
             }
         });
+
         $tastes = $catalogService->getTastesWithCount();
         $weights = $catalogService->getWeightsWithCount();
         $activeTastes = $tastes->where('active', true);
@@ -34,6 +35,7 @@ class CatalogController extends Controller
         $clearRoute = $catalogService->getClearRoute();
 
         if ($r->isMethod('post')) {
+            $categories_component = new FilterCategories($categories);
             $items_component = new CardItems($products);
             $pagination_component = new Pagination($count, $pagesize, $page, $paglink, true);
             $filters_component = new Filters($tastes, $weights, $clearRoute, $activeTastes, $activeWeights, $r->has('category'));
@@ -41,6 +43,7 @@ class CatalogController extends Controller
                 'html' => $items_component->render(),
                 'pagination' => $pagination_component->render(),
                 'filters' => $filters_component->render(),
+                'categories' => $categories_component->render(),
             ]);
         }
 

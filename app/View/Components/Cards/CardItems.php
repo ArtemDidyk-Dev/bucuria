@@ -15,7 +15,7 @@ class CardItems extends Component
         $this->items = $items;
     }
 
-    public function render(): View|Closure|string
+        public function render(): View|Closure|string
     {
         return view('components.cards.card-items', [
             'items' => $this->items,

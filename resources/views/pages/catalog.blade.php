@@ -36,15 +36,12 @@
             <div class="container">
 
                 <div class="content-catalog-block">
-                    <div class="filter-item-product">
-                        @foreach ($categories as $category)
-                            <x-cards.filter-item :item="$category"/>
-                        @endforeach
-                    </div>
+                    <x-cards.filter-categories :categories="$categories"/>
                 </div>
 
                 <div class="content-catalog-block">
                     <div id="filters" class="filter-block">
+
                         <x-catalog.filters :tastes="$tastes" :weights="$weights" :clearRoute="$clearRoute"
                                            :activeTastes="$activeTastes"
                                            :activeWeights="$activeWeights" activeCategory={{$activeCategory}} />
@@ -81,7 +78,6 @@
                 let href = document.location.href; // Використовуємо поточний URL, щоб зберігати всі активні параметри
                 let url = new URL(href);
                 let params = url.searchParams;
-
                 // Обробляємо чекбокси фільтрів
                 let filters = document.querySelectorAll('.filter-item-checkbox');
                 filters.forEach(filter => {
@@ -116,7 +112,6 @@
                     }
                 });
 
-                // Оновлюємо URL з новими параметрами
                 href = decodeURIComponent(url.toString());
 
                 const response = await post(href, {}, true, loader);
@@ -140,40 +135,63 @@
             }
 
 
-            const filterItem = document.querySelectorAll(".filter-product-item");
-            if (filterItem) {
-                filterItem.forEach(filter => {
-                    filter.addEventListener('click', (event) => {
-                        event.preventDefault();
+            function bindFilterClickEvents() {
+                const filterItems = document.querySelectorAll(".filter-product-item");
+                if (filterItems) {
+                    filterItems.forEach(filter => {
+                        filter.addEventListener('click', async (event) => {
+                            event.preventDefault();
 
-                        let link = window.location.href;
-                        let categorySlug = filter.getAttribute('data-link');
-                        let url = new URL(link);
+                            let link = window.location.href;
+                            let categorySlug = filter.getAttribute('data-link');
+                            let url = new URL(link);
+                            const searchParams = url.searchParams;
+                            let categories = [];
+                            searchParams.forEach((value, key) => {
+                                if (key.startsWith('category')) {
+                                    categories.push(value);
+                                }
+                            });
 
-                        // Отримуємо масив категорій
-                        let currentCategories = url.searchParams.getAll('category[]');
+                            if (!categories.includes(categorySlug)) {
+                                categories.push(categorySlug);
+                            } else {
+                                categories = categories.filter(category => category !== categorySlug);
+                            }
+                            let taste = url.searchParams.getAll('taste');
+                            let page = url.searchParams.getAll('page');
+                            url = new URL("{{route('catalog')}}");
 
-                        // Додаємо або видаляємо категорію
-                        if (!currentCategories.includes(categorySlug)) {
-                            currentCategories.push(categorySlug);
-                        } else {
-                            currentCategories = currentCategories.filter(category => category !== categorySlug);
-                        }
+                            categories.forEach(category => {
+                                url.searchParams.append('category[]', category);
+                            });
+                            if(taste.length > 0) {
+                                url.searchParams.append('taste', taste.join());
+                            }
+                            if(page.length > 0) {
+                                url.searchParams.append('page', page.join());
+                            }
+                            let href = decodeURIComponent(url.toString());
 
-                        // Очищаємо попередні 'category[]' параметри
-                        url.searchParams.delete('category[]');
-                        currentCategories.forEach(category => {
-                            url.searchParams.append('category[]', category);
+                            const response = await post(href, {}, true, true);
+                            if (response.success) {
+                                document.querySelector('#content-block').innerHTML = response.data.html;
+                                document.querySelector('#pagination').innerHTML = response.data.pagination;
+                                document.querySelector('#filters').innerHTML = response.data.filters;
+                                document.querySelector('#categories').innerHTML = response.data.categories;
+                                history.pushState({}, '', href); // Оновлюємо історію браузера з новими параметрами
+
+                                window.scrollTo({
+                                    top: 0,
+                                    behavior: 'smooth'
+                                });
+                                bindFilterClickEvents();
+                            }
                         });
-
-                        // Переводимо URL у строку і декодуємо для отримання '[]' замість '%5B%5D'
-                        let decodedUrl = decodeURIComponent(url.toString());
-
-                        // Оновлюємо посилання
-                        window.location.href = decodedUrl;
                     });
-                });
+                }
             }
+            bindFilterClickEvents();
         </script>
     </x-slot>
 
