@@ -27,11 +27,22 @@
                     ];
                 }
             @endphp
-            <x-inputs.select
-                :label="$s->field('Форма обратной связи', 'Описание поля Type', 'text', true, 'Type of cooperation')"
-                name="type"
-                :items="$typesItems"
-            />
+            @if(!empty($typesItems))
+                <x-inputs.select
+                    :label="$s->field('Форма обратной связи', 'Описание поля Type', 'text', true, 'Type of cooperation')"
+                    name="type"
+                    :items="$typesItems"
+                />
+            @else
+                <div class="input-block">
+                    <label for="type"
+                           class="label-input color-white">{{ $s->field('Форма обратной связи', 'Описание поля Type', 'text', true, 'Type of cooperation')}}</label>
+                    <input class="input extra-text"
+                           placeholder="{{ $s->field('Форма обратной связи', 'Описание поля Type', 'text', true, 'Type of cooperation') }}"
+                           type="text"  name="type">
+                </div>
+            @endif
+
         @endif
         @if ($department)
             @php

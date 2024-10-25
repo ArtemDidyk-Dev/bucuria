@@ -35,7 +35,7 @@
 
     <div class="big-image-card-section">
         <div class="container">
-            <x-cards.ingradient-big-card-empty title=""
+            <x-cards.ingradient-big-card-empty title="{{ $s->field('Блок 1', 'Заголовок', 'textarea', true, 'HOW TO BECOME A NEW PARTNER OF THE COMPANY') }}"
                                          description="" />
         </div>
     </div>
@@ -44,8 +44,8 @@
         <div class="container">
             <x-cards.big-image-card
                 image="{{ $s->field('Блок 1', 'Картинка', 'photo', true, '/images/partners2.png') }}"
-                descriptionBlockTitle="{{ $s->field('Блок 1', 'Заголовок', 'textarea', true, 'HOW TO BECOME A NEW PARTNER OF THE COMPANY') }}"
-                descriptionBlockDesc=""
+                descriptionBlockTitle=""
+                descriptionBlockDesc="{{ $s->field('Блок 1', 'Описание', 'textarea', true, 'If you want to sell on our marketplace yourself, please fill out the application. If you would like to cooperate as a supplier, please see the information below.') }}"
                 top descriptionBlockRight />
         </div>
     </div>
@@ -227,7 +227,7 @@
 @mobilecss
 <style>
     .ingradient-big-card.empty {
-        height: 300px;
+        height: auto;
     }
 
     .breadcrumbs-block {

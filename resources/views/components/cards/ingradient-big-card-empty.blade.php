@@ -21,6 +21,7 @@
         z-index: 1;
         width: auto;
         height: 991px;
+
     }
 
     .ingradient-big-card-img {
@@ -34,13 +35,19 @@
 
     .ingradient-big-card-content {
         padding: 59px 80px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .ingradient-big-card-title {
         display: flex;
-        justify-content: flex-start;
+        justify-content: center !important;
         width: 100%;
         text-transform: uppercase;
+
     }
 
     .ingradient-big-card-desc {
