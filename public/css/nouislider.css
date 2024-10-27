@@ -1,4 +1,4 @@
-/* Functional styling;
+    /* Functional styling;
  * These styles are required for noUiSlider to function.
  * You don't need to change these rules to apply your design.
  */
@@ -101,7 +101,7 @@
 .noUi-horizontal .noUi-handle {
     width: 16px;
     height: 16px;
-    right: -8px;
+    right: 0px;
     top: -6px;
     background-color: #C81317;
     border-radius: 100px;
@@ -373,9 +373,14 @@
 }
 
 .min-circle {
-    left: -9px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .max-circle {
-    right: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.noUi-handle-lower {
+    right: -8px !important;
 }

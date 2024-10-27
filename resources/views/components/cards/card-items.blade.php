@@ -13,6 +13,8 @@
     .content-product {
         display: flex;
         flex-wrap: wrap;
+        justify-content: flex-start;
+        margin-left: -24px;
     }
 </style>
 @mobilecss

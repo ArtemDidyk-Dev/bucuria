@@ -3,7 +3,7 @@
 namespace App\View\Components\Catalog;
 
 use Illuminate\View\Component;
-
+use Illuminate\Http\Request;
 class Filters extends Component
 {
     public $tastes;
@@ -12,7 +12,20 @@ class Filters extends Component
     public $activeTastes;
     public $activeWeights;
     public $activeCategory;
-    public function __construct($tastes = [], $weights = [], $clearRoute = '', $activeTastes = [], $activeWeights = [], $activeCategory = '')
+    public $weightsMax;
+    public $weightsMin;
+    public bool $activeWeightsFilter;
+    public function __construct(
+        Request $request,
+        $tastes = [],
+        $weights = [],
+        $clearRoute = '',
+        $activeTastes = [],
+        $activeWeights = [],
+        $activeCategory = '',
+        $weightsMin = '',
+        $weightsMax = '',
+    )
     {
         $this->tastes = $tastes;
         $this->weights = $weights;
@@ -20,11 +33,14 @@ class Filters extends Component
         $this->activeTastes = $activeTastes;
         $this->activeWeights = $activeWeights;
         $this->activeCategory = $activeCategory;
+        $this->weightsMin = $weightsMin;
+        $this->weightsMax = $weightsMax;
+        $this->activeWeightsFilter = $request->has(['minWidth', 'maxWidth']);
     }
 
     public function render()
     {
-        
+
         return view('components.catalog.filters', [
             'tastes'        => $this->tastes,
             'weights'       => $this->weights,
@@ -32,6 +48,9 @@ class Filters extends Component
             'activeTastes'  => $this->activeTastes,
             'activeWeights' => $this->activeWeights,
             'activeCategory' => $this->activeCategory,
+            'weightsMin'    =>  $this->weightsMin,
+            'weightsMax'     => $this->weightsMax,
+            'activeWeightsFilter' => $this->activeWeightsFilter,
         ])->render();
     }
 }

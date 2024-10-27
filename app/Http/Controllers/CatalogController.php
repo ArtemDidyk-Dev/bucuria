@@ -14,6 +14,7 @@ class CatalogController extends Controller
 {
     public function catalog(Request $r)
     {
+
         $slugProduct = $r->query('category') ?? [];
         $catalogService = new CatalogService($slugProduct);
         $page = $r->get('page', 1);
@@ -29,16 +30,16 @@ class CatalogController extends Controller
         $weights = $catalogService->getWeightsWithCount();
         $activeTastes = $tastes->where('active', true);
         $activeWeights = $weights->where('active', true);
-
         [$products, $count] = $catalogService->getProducts();
 
         $clearRoute = $catalogService->getClearRoute();
-
+        $weightsMin = ($r->has('minWidth')) ? $r->get('minWidth') : $catalogService->parseWeightsValue($weights, 'min');
+        $weightsMax = ($r->has('maxWidth')) ? $r->get('maxWidth') : $catalogService->parseWeightsValue($weights, 'max');
         if ($r->isMethod('post')) {
             $categories_component = new FilterCategories($categories);
             $items_component = new CardItems($products);
             $pagination_component = new Pagination($count, $pagesize, $page, $paglink, true);
-            $filters_component = new Filters($tastes, $weights, $clearRoute, $activeTastes, $activeWeights, $r->has('category'));
+            $filters_component = new Filters($r, $tastes, $weights, $clearRoute, $activeTastes, $activeWeights, $r->has('category'),$weightsMin,$weightsMax);
             return $this->response([
                 'html' => $items_component->render(),
                 'pagination' => $pagination_component->render(),
@@ -69,6 +70,8 @@ class CatalogController extends Controller
             'metaTitle' => $metaTitle,
             'metaDescription' => $metaDescription,
             'metaKeywords' => $metaKeywords,
+            'weightsMin' =>  $weightsMin,
+            'weightsMax' =>  $weightsMax,
         ]);
     }
 }

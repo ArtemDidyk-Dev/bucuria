@@ -41,10 +41,17 @@
 
                 <div class="content-catalog-block">
                     <div id="filters" class="filter-block">
-
-                        <x-catalog.filters :tastes="$tastes" :weights="$weights" :clearRoute="$clearRoute"
+                        <x-catalog.filters :tastes="$tastes"
+                                           :weights="$weights"
+                                           :clearRoute="$clearRoute"
                                            :activeTastes="$activeTastes"
-                                           :activeWeights="$activeWeights" activeCategory={{$activeCategory}} />
+                                           :activeWeights="$activeWeights"
+                                           weightsMin="{{$weightsMin}}"
+                                           weightsMax="{{$weightsMax}}"
+                                           activeCategory={{$activeCategory}}
+
+
+                        />
                         <x-inputs.download href="{{$s->field('Каталог', 'Файл', 'photo', true)}}">
                             {{$s->field('Каталог', 'Текст кнопки', 'text', true, 'download catalog')}}
                         </x-inputs.download>
@@ -73,6 +80,7 @@
 
     <x-slot name="javascript">
         <script>
+            initializeSlider()
             async function makeFilters(loader = true) {
                 const clearRoute = document.querySelector('.filter').getAttribute('data-href');
                 let href = document.location.href; // Використовуємо поточний URL, щоб зберігати всі активні параметри
@@ -120,7 +128,7 @@
                     document.querySelector('#content-block').innerHTML = response.data.html;
                     document.querySelector('#pagination').innerHTML = response.data.pagination;
                     document.querySelector('#filters').innerHTML = response.data.filters;
-
+                    initializeSlider()
                     history.pushState({}, '', href); // Оновлюємо історію браузера з новими параметрами
 
                     window.scrollTo({
@@ -133,7 +141,80 @@
 
                 return false;
             }
+            function initializeSlider() {
+                const slider = document.getElementById('price-slider');
+                if (slider) {
+                    let min = +document.querySelector('[data-minprice]').value; // виправлено: 'data-minPrice' на 'data-minprice'
+                    let max = +document.querySelector('[data-maxprice]').value; // виправлено: 'data-maxPrice' на 'data-maxprice'
 
+                    let inputMin = document.querySelector('[data-minprice]');
+                    let inputMax = document.querySelector('[data-maxprice]');
+                    let tooltips = [document.createElement('span'), document.createElement('span')];
+
+                    noUiSlider.create(slider, {
+                        start: [min, max],
+                        connect: true,
+                        range: {
+                            'min': min,
+                            'max': max
+                        }
+                    });
+
+                    slider.noUiSlider.on('update', function(values, handle) {
+                        let minValue = parseInt(values[0]);
+                        let maxValue = parseInt(values[1]);
+                        inputMin.value = minValue;
+                        inputMax.value = maxValue;
+                        tooltips[handle].innerHTML = values[handle];
+                        tooltips[handle].classList.add('nouislider-tooltip');
+                        // оновлення круга
+                        const circles = document.querySelectorAll(".noUi-touch-area");
+                        circles[handle].innerHTML = `<span class="${handle === 0 ? 'min-circle' : 'max-circle'}">${handle === 0 ? minValue : maxValue}</span>`;
+                    });
+
+                    let minCountInput = min;
+                    let maxCountInput = max;
+
+                    inputMin.addEventListener("input", (e) => {
+                        inputMin.setAttribute('value', e.target.value);
+                        minCountInput = e.target.value;
+                        slider.noUiSlider.set([minCountInput, maxCountInput]);
+                    });
+
+                    inputMax.addEventListener("input", (e) => {
+                        inputMax.setAttribute('value', e.target.value);
+                        maxCountInput = e.target.value;
+                        setTimeout(() => {
+                            slider.noUiSlider.set([minCountInput, maxCountInput]);
+                        }, 1500);
+                    });
+                    let buttonShow = document.querySelector('.show.weights')
+                    buttonShow.addEventListener('click', async () => {
+                        let min = +document.querySelector('[data-minprice]').value;
+                        let max = +document.querySelector('[data-maxprice]').value;
+                        let href = document.location.href; // Використовуємо поточний URL, щоб зберігати всі активні параметри
+                        let url = new URL(href);
+                        let params = url.searchParams;
+                        params.set('minWidth', min);
+                        params.set('maxWidth', max);
+                        href = decodeURIComponent(url.toString());
+                        const response = await post(href, {}, true, loader);
+                        if (response.success) {
+                            document.querySelector('#content-block').innerHTML = response.data.html;
+                            document.querySelector('#pagination').innerHTML = response.data.pagination;
+                            document.querySelector('#filters').innerHTML = response.data.filters;
+                            initializeSlider()
+                            history.pushState({}, '', href);
+                            window.scrollTo({
+                                top: 0,
+                                behavior: 'smooth'
+                            });
+
+                            // checkLazy(); // Якщо у тебе є логіка для ленивого завантаження, активуй це
+                        }
+                    })
+                }
+            }
 
             function bindFilterClickEvents() {
                 const filterItems = document.querySelectorAll(".filter-product-item");
@@ -186,6 +267,7 @@
                                     behavior: 'smooth'
                                 });
                                 bindFilterClickEvents();
+                                initializeSlider();
                             }
                         });
                     });
@@ -211,6 +293,27 @@
 
 @desktopcss
 <style>
+    .show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        text-align: center;
+        padding: 6px;
+        border: none;
+        border-radius: 8px;
+        margin-top: 20px;
+        background: var(--color-red);
+        transition: .3s;
+        text-transform: uppercase;
+        font-family: Raleway;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 24px; /* 171.429% */
+        text-transform: uppercase;
+
+    }
     .breadcrumbs-block {
         margin-left: 80px;
         position: absolute;
@@ -315,12 +418,14 @@
     }
 
     .catalog-cards-block .card-product {
-        margin-right: 24px;
+        margin-left: 24px;
+        flex-basis: calc(25% - 24px);
+        margin-right: 0px !important;
     }
 
-    .card-product:nth-child(4n) {
-        margin-right: 0;
-    }
+    /*.card-product:nth-child(4n) {*/
+    /*    margin-right: 0;*/
+    /*}*/
 
     .arrow-filter {
         display: block;
@@ -338,7 +443,7 @@
         flex-direction: column;
         align-content: flex-start;
         position: relative;
-        width: 222px;
+        width: 100%;
     }
 
     .filter-title {
@@ -358,7 +463,6 @@
         border: none;
         outline: none;
         transition: 0.4s;
-
         border-bottom: 1px solid #D2D2D2;
     }
 
@@ -531,6 +635,27 @@
 </style>
 @mobilecss
 <style>
+    .show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        text-align: center;
+        padding: 6px;
+        border: none;
+        border-radius: 8px;
+        margin-top: 20px;
+        background: var(--color-red);
+        transition: .3s;
+        text-transform: uppercase;
+        font-family: Raleway;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 24px; /* 171.429% */
+        text-transform: uppercase;
+
+    }
     .banner {
         display: block;
         width: auto;

@@ -22,7 +22,8 @@ class CatalogService
     private $categories;
     private $taste;
     private $weight;
-
+    private $minWidth;
+    private $maxWidth;
     public const PAGESIZE = 24;
 
     public function __construct(?array $categories)
@@ -31,7 +32,8 @@ class CatalogService
         $this->page = request()->get('page', 1);
         $this->taste = request()->get('taste', '');
         $this->weight = request()->get('weight', '');
-
+        $this->minWidth = request()->get('minWidth', '');
+        $this->maxWidth = request()->get('maxWidth', '');
         $slugParams = request()->all();
         $this->slugParams = $slugParams;
 
@@ -40,14 +42,23 @@ class CatalogService
 
     public function getProducts()
     {
+        $widthIds = Weight::all()
+            ->filter(function ($item) {
+                return $item->weightGram >= $this->minWidth && $item->weightGram <= $this->maxWidth;
+            })
+            ->pluck('id')
+            ->toArray();
+
         $query = $this->getOffersQuery()
-            ->with('weight')
-            ->with('tags')
-            ->with('product');
+            ->when(!empty($widthIds), function ($query) use ($widthIds) {
+                $query->whereHas('weight', function ($q) use ($widthIds) {
+                    $q->whereIn('id', $widthIds);
+                });
+            })
+            ->with(['weight', 'tags', 'product']);
 
         $this->loadTastes($query);
         $this->loadWeights($query);
-
         $count = $query->count();
 
         $products = $query
@@ -278,5 +289,19 @@ class CatalogService
             $s->field('Каталог Meta', 'Meta Description', 'textarea', true, 'Bucuria | Catalog'),
             $s->field('Каталог Meta', 'Meta Keywords', 'textarea', true, 'Bucuria | Catalog'),
         ];
+    }
+
+    public function parseWeightsValue(Collection $weights, string $type)
+    {
+        $weightsInGrams = $weights->map(function ($w) {
+
+            return $w->weightGram;
+        });
+
+        if ($type === 'min') {
+            return $weightsInGrams->min();
+        }
+
+        return $weightsInGrams->max();
     }
 }
