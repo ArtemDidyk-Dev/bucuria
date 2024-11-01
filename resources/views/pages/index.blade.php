@@ -189,7 +189,7 @@
     }
 
     .big-card-section .card-title {
-        font-size: 42px;
+        font-size: 63px;
         width: 1200px;
     }
 

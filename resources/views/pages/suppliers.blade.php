@@ -50,6 +50,7 @@
         </div>
     </div>
 
+    @if($s->field('Блок 2', 'Заголовок', 'textarea', true, '') != "")
     <div class="big-image-card-section">
         <div class="container">
             <x-cards.ingradient-big-card title="{{ $s->field('Блок 2', 'Заголовок', 'textarea', true, '') }}"
@@ -57,6 +58,7 @@
         </div>
     </div>
 
+    @endif
     <div class="big-image-card-section">
         <div class="container">
             <x-cards.big-image-card
@@ -188,7 +190,7 @@
         height: initial;
     }
     .ingradient-big-card.empty {
-        height: 500px;
+        height: 250px;
     }
     .ingradient-big-card-img {
         height: 100%;
